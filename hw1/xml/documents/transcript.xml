@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Transcript
+        xmlns="http://www.limmen.kth.se.id2208.hw1.transcript"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.limmen.kth.se.id2208.hw1.transcript ./../schemas/transcript.xsd"
+        universityName="KTH"
+        generationDate="2017-01-23">
+
+    <Student>
+        <FirstName>John</FirstName>
+        <LastName>Doe</LastName>
+        <CivicRegistrationNumber>910406-1337</CivicRegistrationNumber>
+    </Student>
+
+    <Degrees>
+        <Degree>
+            <Name>Master of Distributed Systems</Name>
+            <DateOfIssue>2014-09-16</DateOfIssue>
+            <DateOfCompletion>2014-06-04</DateOfCompletion>
+            <Credits>180</Credits>
+        </Degree>
+    </Degrees>
+
+    <Courses>
+        <Course>
+            <Name>Grid Computing</Name>
+            <Code>IJ2208</Code>
+            <Credits>7.5</Credits>
+            <Date>2016-03-16</Date>
+            <Grade>A</Grade>
+        </Course>
+        <Course>
+            <Name>Distributed Systems Architecture</Name>
+            <Code>IJ2213</Code>
+            <Credits>7.5</Credits>
+            <Date>2016-03-16</Date>
+            <Grade>A</Grade>
+        </Course>
+    </Courses>
+
+</Transcript>

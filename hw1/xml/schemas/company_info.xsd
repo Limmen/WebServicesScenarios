@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="http://www.limmen.kth.se.id2208.hw1.company_info"
+            xmlns="http://www.limmen.kth.se.id2208.hw1.company_info"
+            elementFormDefault="qualified">
+
+    <xsd:annotation>
+        <xsd:documentation xml:lang="en">
+            This Schema defines a Company Info XML document. The Company Info provides general information
+            about a company to get a 10k feet overview about what the company does.
+        </xsd:documentation>
+    </xsd:annotation>
+
+    <xsd:element name="CompanyInfo" type="CompanyInfoType"/>
+
+    <xsd:complexType name="CompanyInfoType">
+
+    </xsd:complexType>
+
+</xsd:schema>

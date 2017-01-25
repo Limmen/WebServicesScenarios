@@ -1,0 +1,92 @@
+<?xml version="1.0" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="http://www.limmen.kth.se.id2208.hw1.transcript"
+            xmlns="http://www.limmen.kth.se.id2208.hw1.transcript"
+            elementFormDefault="qualified">
+
+    <xsd:annotation>
+        <xsd:documentation xml:lang="en">
+            This Schema defines a general Transcript XML document from a University. It is linked to a particular
+            student
+            and lists th student's degrees and courses obtained at the university.
+        </xsd:documentation>
+    </xsd:annotation>
+
+    <!-- Declares transcript element that must be present in the xml-doc -->
+    <xsd:element name="Transcript" type="TranscriptType"/>
+
+
+    <!-- Simple types declared separately which can allow for reuse within various elements -->
+    <xsd:simpleType name="CreditsType">
+        <xsd:restriction base="xsd:decimal">
+            <xsd:minInclusive value="0"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <!-- Defines a complex type for a transcript, that can be re-used in different schemas -->
+    <xsd:complexType name="TranscriptType">
+        <xsd:sequence>
+            <xsd:element name="Student">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="FirstName" type="xsd:string"/>
+                        <xsd:element name="LastName" type="xsd:string"/>
+                        <xsd:element name="CivicRegistrationNumber" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+
+            <xsd:element name="Degrees">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="Degree" minOccurs="0" maxOccurs="unbounded">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="Name" type="xsd:string"/>
+                                    <xsd:element name="DateOfIssue" type="xsd:date"/>
+                                    <xsd:element name="DateOfCompletion" type="xsd:date"/>
+                                    <xsd:element name="Credits" type="CreditsType"/>
+                                </xsd:sequence>
+                            </xsd:complexType>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+
+            <xsd:element name="Courses">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="Course" minOccurs="0" maxOccurs="unbounded">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="Name" type="xsd:string"/>
+                                    <xsd:element name="Code">
+                                        <xsd:simpleType>
+                                            <xsd:restriction base="xsd:string">
+                                                <xsd:pattern value="[A-Z]{2}[0-9]{4}"/>
+                                            </xsd:restriction>
+                                        </xsd:simpleType>
+                                    </xsd:element>
+                                    <xsd:element name="Credits" type="CreditsType"/>
+                                    <xsd:element name="Date" type="xsd:date"/>
+                                    <xsd:element name="Grade">
+                                        <xsd:simpleType>
+                                            <xsd:restriction base="xsd:string">
+                                                <xsd:pattern value="[A-F]"/>
+                                            </xsd:restriction>
+                                        </xsd:simpleType>
+                                    </xsd:element>
+                                </xsd:sequence>
+                            </xsd:complexType>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:sequence>
+
+        <!-- Defines attributes that can only be used within transcript elements -->
+        <xsd:attribute name="universityName" type="xsd:string" use="required"/>
+        <xsd:attribute name="generationDate" type="xsd:date" use="required"/>
+    </xsd:complexType>
+
+</xsd:schema>

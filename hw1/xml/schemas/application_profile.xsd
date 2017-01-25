@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="http://www.limmen.kth.se.id2208.hw1.application_profile"
+            xmlns:tscp="http://www.limmen.kth.se.id2208.hw1.transcript"
+            xmlns:emprcd="http://www.limmen.kth.se.id2208.hw1.employment_record"
+            xmlns:compinf="http://www.limmen.kth.se.id2208.hw1.company_info"
+            xmlns:cv="http://www.limmen.kth.se.id2208.hw1.short_cv"
+            elementFormDefault="qualified">
+
+    <xsd:import schemaLocation="transcript.xsd" namespace="http://www.limmen.kth.se.id2208.hw1.transcript"/>
+    <xsd:import schemaLocation="employment_record.xsd"
+                namespace="http://www.limmen.kth.se.id2208.hw1.employment_record"/>
+    <xsd:import schemaLocation="company_info.xsd" namespace="http://www.limmen.kth.se.id2208.hw1.company_info"/>
+    <xsd:import schemaLocation="short_cv.xsd" namespace="http://www.limmen.kth.se.id2208.hw1.short_cv"/>
+
+    <xsd:annotation>
+        <xsd:documentation xml:lang="en">
+            This Schema defines a Application Profile XML document. The Application Profile represents a job-seeker
+            and typically contains: CV, information about relevant academic degree(s), previous working experiences,
+            information about companies where the applicant have worked before, motivation letter, places desired to
+            work,
+            type of job the applicant is seeking (permanent, part time, contract) or other references or relevant
+            information.
+        </xsd:documentation>
+    </xsd:annotation>
+
+    <xsd:element name="ApplicationProfile">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="Transcript" type="tscp:TranscriptType"/>
+                <xsd:element name="EmploymentRecord" type="emprcd:EmploymentRecordType"/>
+                <xsd:element name="CompanyInfo" type="compinf:CompanyInfoType"/>
+                <xsd:element name="ShortCV" type="cv:ShortCVType"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+</xsd:schema>

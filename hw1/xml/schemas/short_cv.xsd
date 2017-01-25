@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="http://www.limmen.kth.se.id2208.hw1.short_cv"
+            xmlns="http://www.limmen.kth.se.id2208.hw1.short_cv"
+            elementFormDefault="qualified">
+
+    <xsd:element name="ShortCV" type="ShortCVType"/>
+
+    <xsd:complexType name="ShortCVType">
+
+    </xsd:complexType>
+
+</xsd:schema>

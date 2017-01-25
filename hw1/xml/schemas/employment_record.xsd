@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="http://www.limmen.kth.se.id2208.hw1.employment_record"
+            xmlns="http://www.limmen.kth.se.id2208.hw1.employment_record"
+            elementFormDefault="qualified">
+
+    <xsd:annotation>
+        <xsd:documentation xml:lang="en">
+            This Schema defines a Employment Record XML document. The employment record presents previous employments
+            and working experience.
+        </xsd:documentation>
+    </xsd:annotation>
+
+    <xsd:element name="EmploymentRecord" type="EmploymentRecordType"/>
+
+    <xsd:complexType name="EmploymentRecordType">
+
+    </xsd:complexType>
+
+</xsd:schema>
