@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ShortCV xmlns="http://www.limmen.kth.se.id2208.hw1.short_cv"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.limmen.kth.se.id2208.hw1.short_cv ./../schemas/short_cv.xsd">
+    <PersonalInformation>
+        <FirstName>John</FirstName>
+        <LastName>Doe</LastName>
+        <City>Stockholm</City>
+        <CivicRegistrationNumber>910406-1337</CivicRegistrationNumber>
+        <Email>johdoe@kth.se</Email>
+    </PersonalInformation>
+    <Skills>
+        <Skill>XML</Skill>
+        <Skill>Web Services</Skill>
+        <Skill>Semantic Web</Skill>
+    </Skills>
+    <Preferences>
+        <JobInterest>Looking for job opportunities within the field of Web Services</JobInterest>
+        <JobType>permanent</JobType>
+        <Locations>
+            <Location>Stockholm</Location>
+            <Location>Uppsala</Location>
+            <Location>Södertälje</Location>
+        </Locations>
+    </Preferences>
+    <MotivationLetter>I'm very passionate about Web Services and I read XML before bed</MotivationLetter>
+</ShortCV>

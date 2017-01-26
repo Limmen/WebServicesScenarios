@@ -1,0 +1,26 @@
+<CompaniesInfo xmlns="http://www.limmen.kth.se.id2208.hw1.company_info"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://www.limmen.kth.se.id2208.hw1.company_info  ./../schemas/company_info.xsd">
+    <Company>
+        <Name>SOAP Solutions</Name>
+        <Address>Ärvingevägen 14</Address>
+        <Anno>2008</Anno>
+        <About>We provide complete web services solutions. SOAP Solutions at your service</About>
+        <Contact>
+            <Phone>070-1111111</Phone>
+            <Email>contact@soap_solutions.com</Email>
+        </Contact>
+        <Website>soap_solutions.com</Website>
+    </Company>
+    <Company>
+        <Name>FIFAA</Name>
+        <Address>Qatar</Address>
+        <Anno>2008</Anno>
+        <About>Fotball association authority</About>
+        <Contact>
+            <Email>contact@fifaa.com</Email>
+        </Contact>
+        <Website>fifaaa.com</Website>
+    </Company>
+</CompaniesInfo>
+

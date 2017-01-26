@@ -13,8 +13,9 @@
     </Student>
 
     <Degrees>
-        <Degree>
+        <Degree degreeId="TSEDM-HT16">
             <Name>Master of Distributed Systems</Name>
+            <StartDate>2012-09-01</StartDate>
             <DateOfIssue>2014-09-16</DateOfIssue>
             <DateOfCompletion>2014-06-04</DateOfCompletion>
             <Credits>180</Credits>
@@ -22,7 +23,7 @@
     </Degrees>
 
     <Courses>
-        <Course>
+        <Course degree="TSEDM-HT16">
             <Name>Grid Computing</Name>
             <Code>IJ2208</Code>
             <Credits>7.5</Credits>

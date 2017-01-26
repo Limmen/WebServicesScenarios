@@ -1,0 +1,18 @@
+<EmploymentRecord xmlns="http://www.limmen.kth.se.id2208.hw1.employment_record"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://www.limmen.kth.se.id2208.hw1.employment_record  ./../schemas/employment_record.xsd">
+    <Employee>
+        <FirstName>John</FirstName>
+        <LastName>Doe</LastName>
+        <CivicRegistrationNumber>910406-1337</CivicRegistrationNumber>
+        <Email>johdoe@kth.se</Email>
+    </Employee>
+    <EmploymentHistory>
+        <Employment>
+            <StartDate>2013-01-07</StartDate>
+            <EndDate>2015-02-03</EndDate>
+            <Company>SOAP Solutions</Company>
+            <Title>Software Engineer</Title>
+        </Employment>
+    </EmploymentHistory>
+</EmploymentRecord>
