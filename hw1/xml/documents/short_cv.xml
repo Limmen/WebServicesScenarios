@@ -7,7 +7,7 @@
         <LastName>Doe</LastName>
         <City>Stockholm</City>
         <CivicRegistrationNumber>910406-1337</CivicRegistrationNumber>
-        <Email>johdoe@kth.se</Email>
+        <Email>johndoe@kth.se</Email>
     </PersonalInformation>
     <Skills>
         <Skill>XML</Skill>

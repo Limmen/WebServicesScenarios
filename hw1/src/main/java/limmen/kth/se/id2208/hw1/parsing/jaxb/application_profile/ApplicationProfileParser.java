@@ -15,10 +15,13 @@ import java.io.File;
  */
 public class ApplicationProfileParser {
     private static final String SCHEMA = "xml/schemas/application_profile.xsd";
-    private static final String DOCUMENT = "xml/documents/application_profile.xml";
+    private static final String RELATIVE_SCHEMA = "../schemas/application_profile.xsd";
+    private static final String NAMESPACE = "http://www.limmen.kth.se.id2208.hw1.application_profile";
+    private static final String DOCUMENT = "xml/documents/application_profile_generated_task1.xml";
     private final SchemaFactory schemaFactory;
     private JAXBContext jaxbContext;
     private Schema applicationProfileSchema;
+    private File applicationProfileDocument;
     private Marshaller marshaller;
 
     public ApplicationProfileParser(SchemaFactory schemaFactory) {
@@ -27,13 +30,16 @@ public class ApplicationProfileParser {
 
     public void init() throws SAXException, JAXBException {
         applicationProfileSchema = schemaFactory.newSchema(new File(SCHEMA));
+        applicationProfileDocument = new File(DOCUMENT);
         jaxbContext = JAXBContext.newInstance(ApplicationProfile.class);
         marshaller = jaxbContext.createMarshaller();
         marshaller.setSchema(applicationProfileSchema);
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+        marshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
+        marshaller.setProperty(Marshaller.JAXB_SCHEMA_LOCATION, NAMESPACE + " " + RELATIVE_SCHEMA);
     }
 
     public void generateApplicationProfileDocument(ApplicationProfile applicationProfile) throws JAXBException {
-        marshaller.marshal(applicationProfile, System.out);
+        marshaller.marshal(applicationProfile, applicationProfileDocument);
     }
 }

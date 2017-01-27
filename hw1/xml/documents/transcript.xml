@@ -28,14 +28,14 @@
             <Code>IJ2208</Code>
             <Credits>7.5</Credits>
             <Date>2016-03-16</Date>
-            <Grade>A</Grade>
+            <Grade>5</Grade>
         </Course>
         <Course>
             <Name>Distributed Systems Architecture</Name>
             <Code>IJ2213</Code>
             <Credits>7.5</Credits>
             <Date>2016-03-16</Date>
-            <Grade>A</Grade>
+            <Grade>5</Grade>
         </Course>
     </Courses>
 

@@ -7,6 +7,8 @@ public class Startup {
 
     public static void main(String[] args) {
         Parser parser = new Parser();
-        parser.createApplicationProfile();
+        parser.parseWithDOM_SAX_JAXB();
+        parser.combineWithXSLT();
+        parser.buildWithXSLT();
     }
 }

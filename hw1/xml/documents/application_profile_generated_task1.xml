@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ApplicationProfile xmlns="http://www.limmen.kth.se.id2208.hw1.application_profile" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.limmen.kth.se.id2208.hw1.application_profile ../schemas/application_profile.xsd">
+    <PersonalInformation>
+        <Person>
+            <FirstName>John</FirstName>
+            <LastName>Doe</LastName>
+            <CivicRegistrationNumber>910406-1337</CivicRegistrationNumber>
+        </Person>
+        <Preferences>
+            <JobInterest>Looking for job opportunities within the field of Web Services</JobInterest>
+            <JobType>permanent</JobType>
+            <Locations>
+                <Location>Stockholm</Location>
+                <Location>Uppsala</Location>
+                <Location>Södertälje</Location>
+            </Locations>
+        </Preferences>
+        <MotivationLetter>I'm very passionate about Web Services and I read XML before bed</MotivationLetter>
+    </PersonalInformation>
+    <Degrees>
+        <Degree>
+            <Name>Master of Distributed Systems</Name>
+            <StartDate>2012-09-01</StartDate>
+            <DateOfCompletion>2014-06-04</DateOfCompletion>
+            <Credits>180.0</Credits>
+            <GPA>5.0</GPA>
+        </Degree>
+    </Degrees>
+    <WorkingExperience>
+        <Employment>
+            <StartDate>2013-01-07</StartDate>
+            <EndDate>2015-02-03</EndDate>
+            <Company>
+                <Name>SOAP Solutions</Name>
+                <About>We provide complete web services solutions. SOAP Solutions at your service</About>
+                <Website>soap_solutions.com</Website>
+            </Company>
+            <Title>Software Engineer</Title>
+        </Employment>
+    </WorkingExperience>
+</ApplicationProfile>

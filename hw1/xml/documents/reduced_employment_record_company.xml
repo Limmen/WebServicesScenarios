@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WorkingExperience xmlns="http://www.limmen.kth.se.id2208.hw1.application_profile">
+   <Employment>
+      <StartDate>2013-01-07</StartDate>
+      <EndDate>2015-02-03</EndDate>
+      <Company>
+         <Name>SOAP Solutions</Name>
+         <About>We provide complete web services solutions. SOAP Solutions at your service</About>
+         <Website>soap_solutions.com</Website>
+      </Company>
+      <Title>Software Engineer</Title>
+   </Employment>
+</WorkingExperience>

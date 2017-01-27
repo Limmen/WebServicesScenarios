@@ -80,8 +80,8 @@
                                         <xsd:element name="Date" type="xsd:date"/>
                                         <xsd:element name="Grade">
                                             <xsd:simpleType>
-                                                <xsd:restriction base="xsd:string">
-                                                    <xsd:pattern value="[A-F]"/>
+                                                <xsd:restriction base="xsd:integer">
+                                                    <xsd:pattern value="[0-5]"/>
                                                 </xsd:restriction>
                                             </xsd:simpleType>
                                         </xsd:element>

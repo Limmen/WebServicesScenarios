@@ -12,13 +12,14 @@ import limmen.kth.se.id2208.hw1.parsing.generated_pojos.transcript.Transcript;
  */
 public class PojoMerger {
 
-
     public ApplicationProfile mergePojosToApplicationProfile(ShortCV shortCV, Transcript transcript, EmploymentRecord employmentRecord, CompaniesInfo companiesInfo) {
         ObjectFactory objectFactory = new ObjectFactory();
         ApplicationProfile applicationProfile = objectFactory.createApplicationProfile();
-        applicationProfile.setMotivationLetter(shortCV.getMotivationLetter());
-        applicationProfile.setPreferences(processPreferences(objectFactory, shortCV.getPreferences()));
-        applicationProfile.setPerson(processPerson(objectFactory, shortCV.getPersonalInformation()));
+        ApplicationProfile.PersonalInformation personalInformation = objectFactory.createApplicationProfilePersonalInformation();
+        personalInformation.setMotivationLetter(shortCV.getMotivationLetter());
+        personalInformation.setPreferences(processPreferences(objectFactory, shortCV.getPreferences()));
+        personalInformation.setPerson(processPerson(objectFactory, shortCV.getPersonalInformation()));
+        applicationProfile.setPersonalInformation(personalInformation);
         applicationProfile.setDegrees(processDegrees(objectFactory, transcript.getDegrees(), transcript.getCourses()));
         applicationProfile.setWorkingExperience(processWorkingExperience(objectFactory, employmentRecord.getEmploymentHistory(), companiesInfo));
         return applicationProfile;
@@ -31,7 +32,7 @@ public class PojoMerger {
         for (Transcript.Courses.Course course : courses.getCourse()) {
             if (course.getDegree() != null && course.getDegree().equalsIgnoreCase(degree.getDegreeId())) {
                 totalCredits = totalCredits + course.getCredits();
-                sum = sum + course.getCredits() * getGradePoints(course.getGrade());
+                sum = sum + course.getCredits() * course.getGrade().floatValue();
             }
         }
         float gpa = 0;
@@ -40,26 +41,11 @@ public class PojoMerger {
         return gpa;
     }
 
-    private float getGradePoints(String grade) {
-        if (grade.equalsIgnoreCase("A"))
-            return (float) 5.0;
-        if (grade.equalsIgnoreCase("B"))
-            return (float) 4.0;
-        if (grade.equalsIgnoreCase("C"))
-            return (float) 3.0;
-        if (grade.equalsIgnoreCase("D"))
-            return (float) 2.0;
-        if (grade.equalsIgnoreCase("E"))
-            return (float) 1.0;
-
-        return (float) 0.0;
-    }
-
-    private ApplicationProfile.Preferences processPreferences(ObjectFactory objectFactory, ShortCV.Preferences preferences) {
-        ApplicationProfile.Preferences applicationProfilePreferences = objectFactory.createApplicationProfilePreferences();
+    private ApplicationProfile.PersonalInformation.Preferences processPreferences(ObjectFactory objectFactory, ShortCV.Preferences preferences) {
+        ApplicationProfile.PersonalInformation.Preferences applicationProfilePreferences = objectFactory.createApplicationProfilePersonalInformationPreferences();
         applicationProfilePreferences.setJobInterest(preferences.getJobInterest());
         applicationProfilePreferences.setJobType(preferences.getJobType());
-        ApplicationProfile.Preferences.Locations applicationProfileLocations = objectFactory.createApplicationProfilePreferencesLocations();
+        ApplicationProfile.PersonalInformation.Preferences.Locations applicationProfileLocations = objectFactory.createApplicationProfilePersonalInformationPreferencesLocations();
         for (String location : preferences.getLocations().getLocation()) {
             applicationProfileLocations.getLocation().add(location);
 
@@ -68,8 +54,8 @@ public class PojoMerger {
         return applicationProfilePreferences;
     }
 
-    private ApplicationProfile.Person processPerson(ObjectFactory objectFactory, ShortCV.PersonalInformation personalInformation) {
-        ApplicationProfile.Person person = objectFactory.createApplicationProfilePerson();
+    private ApplicationProfile.PersonalInformation.Person processPerson(ObjectFactory objectFactory, ShortCV.PersonalInformation personalInformation) {
+        ApplicationProfile.PersonalInformation.Person person = objectFactory.createApplicationProfilePersonalInformationPerson();
         person.setFirstName(personalInformation.getFirstName());
         person.setCivicRegistrationNumber(personalInformation.getCivicRegistrationNumber());
         person.setLastName(personalInformation.getLastName());
@@ -102,9 +88,10 @@ public class PojoMerger {
         for (Transcript.Degrees.Degree degree : degrees.getDegree()) {
             ApplicationProfile.Degrees.Degree applicationDegree = objectFactory.createApplicationProfileDegreesDegree();
             applicationDegree.setCredits(degree.getCredits());
+            applicationDegree.setStartDate(degree.getStartDate());
             applicationDegree.setDateOfCompletion(degree.getDateOfCompletion());
             applicationDegree.setName(degree.getName());
-            applicationDegree.setGPA(calculateGPA(degree, courses)); //TODO
+            applicationDegree.setGPA(calculateGPA(degree, courses));
             applicationProfileDegrees.getDegree().add(applicationDegree);
         }
         return applicationProfileDegrees;

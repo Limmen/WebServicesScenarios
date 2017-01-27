@@ -16,62 +16,70 @@
         <xsd:complexType>
             <xsd:sequence>
                 <!-- General Person information, can be collected from short_cv, transcript or employment_record-->
-                <xsd:element name="Person">
+                <xsd:element name="PersonalInformation">
                     <xsd:complexType>
                         <xsd:sequence>
-                            <xsd:element name="FirstName">
-                                <xsd:simpleType>
-                                    <xsd:restriction base="xsd:string">
-                                        <xsd:minLength value="1"/>
-                                    </xsd:restriction>
-                                </xsd:simpleType>
-                            </xsd:element>
-                            <xsd:element name="LastName">
-                                <xsd:simpleType>
-                                    <xsd:restriction base="xsd:string">
-                                        <xsd:minLength value="1"/>
-                                    </xsd:restriction>
-                                </xsd:simpleType>
-                            </xsd:element>
-                            <xsd:element name="CivicRegistrationNumber">
-                                <xsd:simpleType>
-                                    <xsd:restriction base="xsd:string">
-                                        <xsd:pattern value="\d{6}-\d{4}"/>
-                                    </xsd:restriction>
-                                </xsd:simpleType>
-                            </xsd:element>
-                        </xsd:sequence>
-                    </xsd:complexType>
-                </xsd:element>
 
-                <!-- Job preferences, collected from short_cv-->
-                <xsd:element name="Preferences">
-                    <xsd:complexType>
-                        <xsd:sequence>
-                            <xsd:element name="JobInterest" type="xsd:string"/>
-                            <xsd:element name="JobType">
-                                <xsd:simpleType>
-                                    <xsd:restriction base="xsd:string">
-                                        <xsd:enumeration value="permanent"/>
-                                        <xsd:enumeration value="part time"/>
-                                        <xsd:enumeration value="contract"/>
-                                        <xsd:enumeration value="consult"/>
-                                    </xsd:restriction>
-                                </xsd:simpleType>
-                            </xsd:element>
-                            <xsd:element name="Locations">
+                            <xsd:element name="Person">
                                 <xsd:complexType>
                                     <xsd:sequence>
-                                        <xsd:element name="Location" type="xsd:string" maxOccurs="unbounded"/>
+                                        <xsd:element name="FirstName">
+                                            <xsd:simpleType>
+                                                <xsd:restriction base="xsd:string">
+                                                    <xsd:minLength value="1"/>
+                                                </xsd:restriction>
+                                            </xsd:simpleType>
+                                        </xsd:element>
+                                        <xsd:element name="LastName">
+                                            <xsd:simpleType>
+                                                <xsd:restriction base="xsd:string">
+                                                    <xsd:minLength value="1"/>
+                                                </xsd:restriction>
+                                            </xsd:simpleType>
+                                        </xsd:element>
+                                        <xsd:element name="CivicRegistrationNumber">
+                                            <xsd:simpleType>
+                                                <xsd:restriction base="xsd:string">
+                                                    <xsd:pattern value="\d{6}-\d{4}"/>
+                                                </xsd:restriction>
+                                            </xsd:simpleType>
+                                        </xsd:element>
                                     </xsd:sequence>
                                 </xsd:complexType>
                             </xsd:element>
+
+                            <!-- Job preferences, collected from short_cv-->
+                            <xsd:element name="Preferences">
+                                <xsd:complexType>
+                                    <xsd:sequence>
+                                        <xsd:element name="JobInterest" type="xsd:string"/>
+                                        <xsd:element name="JobType">
+                                            <xsd:simpleType>
+                                                <xsd:restriction base="xsd:string">
+                                                    <xsd:enumeration value="permanent"/>
+                                                    <xsd:enumeration value="part time"/>
+                                                    <xsd:enumeration value="contract"/>
+                                                    <xsd:enumeration value="consult"/>
+                                                </xsd:restriction>
+                                            </xsd:simpleType>
+                                        </xsd:element>
+                                        <xsd:element name="Locations">
+                                            <xsd:complexType>
+                                                <xsd:sequence>
+                                                    <xsd:element name="Location" type="xsd:string"
+                                                                 maxOccurs="unbounded"/>
+                                                </xsd:sequence>
+                                            </xsd:complexType>
+                                        </xsd:element>
+                                    </xsd:sequence>
+                                </xsd:complexType>
+                            </xsd:element>
+
+                            <!-- Motivation letter, collected from short_cv -->
+                            <xsd:element name="MotivationLetter" type="xsd:string"/>
                         </xsd:sequence>
                     </xsd:complexType>
                 </xsd:element>
-
-                <!-- Motivation letter, collected from short_cv -->
-                <xsd:element name="MotivationLetter" type="xsd:string"/>
 
                 <!-- Degrees, collected from transcript -->
                 <xsd:element name="Degrees">
@@ -87,6 +95,7 @@
                                                 </xsd:restriction>
                                             </xsd:simpleType>
                                         </xsd:element>
+                                        <xsd:element name="StartDate" type="xsd:date"/>
                                         <xsd:element name="DateOfCompletion" type="xsd:date"/>
                                         <xsd:element name="Credits">
                                             <xsd:simpleType>

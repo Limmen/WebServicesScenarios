@@ -5,7 +5,7 @@
         <FirstName>John</FirstName>
         <LastName>Doe</LastName>
         <CivicRegistrationNumber>910406-1337</CivicRegistrationNumber>
-        <Email>johdoe@kth.se</Email>
+        <Email>johndoe@kth.se</Email>
     </Employee>
     <EmploymentHistory>
         <Employment>
