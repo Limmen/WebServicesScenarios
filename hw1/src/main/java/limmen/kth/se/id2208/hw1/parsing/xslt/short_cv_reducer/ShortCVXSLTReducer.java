@@ -9,6 +9,8 @@ import javax.xml.transform.stream.StreamSource;
 import java.io.File;
 
 /**
+ *  Transforms the short_cv.xml document and only keeps the information relevant to application_profile.xml.
+ *
  * @author Kim Hammar on 2017-01-27.
  */
 public class ShortCVXSLTReducer {
@@ -21,10 +23,20 @@ public class ShortCVXSLTReducer {
     private StreamResult streamResult;
     private Transformer transformer;
 
+    /**
+     * Class constructor
+     *
+     * @param transformerFactory
+     */
     public ShortCVXSLTReducer(TransformerFactory transformerFactory){
         this.transformerFactory = transformerFactory;
     }
 
+    /**
+     * Initialization to perpare for transformations
+     *
+     * @throws TransformerConfigurationException
+     */
     public void init() throws TransformerConfigurationException {
         xmlSource = new StreamSource(new File(XML_SOURCE));
         stylesheet = new StreamSource(new File(STYLESHEET));
@@ -32,6 +44,11 @@ public class ShortCVXSLTReducer {
         transformer = transformerFactory.newTransformer(stylesheet);
     }
 
+    /**
+     * Performs the transformation and writes result to reduced_short_cv.xml
+     *
+     * @throws TransformerException
+     */
     public void reduce() throws TransformerException {
         transformer.transform(xmlSource, streamResult);
     }

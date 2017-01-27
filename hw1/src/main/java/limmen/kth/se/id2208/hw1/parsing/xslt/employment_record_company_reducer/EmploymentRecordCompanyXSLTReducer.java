@@ -9,6 +9,9 @@ import javax.xml.transform.stream.StreamSource;
 import java.io.File;
 
 /**
+ * Transforms the employment_record.xml and company_info.xml document and only keeps the information relevant to
+ * application_profile.xml.
+ *
  * @author Kim Hammar on 2017-01-27.
  */
 public class EmploymentRecordCompanyXSLTReducer {
@@ -21,10 +24,20 @@ public class EmploymentRecordCompanyXSLTReducer {
     private StreamResult streamResult;
     private Transformer transformer;
 
+    /**
+     * Class constructor
+     *
+     * @param transformerFactory
+     */
     public EmploymentRecordCompanyXSLTReducer(TransformerFactory transformerFactory){
         this.transformerFactory = transformerFactory;
     }
 
+    /**
+     * Initialization to prepare for transformations
+     *
+     * @throws TransformerConfigurationException
+     */
     public void init() throws TransformerConfigurationException {
         xmlSource = new StreamSource(new File(XML_SOURCE));
         stylesheet = new StreamSource(new File(STYLESHEET));
@@ -32,6 +45,11 @@ public class EmploymentRecordCompanyXSLTReducer {
         transformer = transformerFactory.newTransformer(stylesheet);
     }
 
+    /**
+     * Performs the transformation and writes the result to employment_record_and_company.xml
+     *
+     * @throws TransformerException
+     */
     public void reduce() throws TransformerException {
         transformer.transform(xmlSource, streamResult);
     }

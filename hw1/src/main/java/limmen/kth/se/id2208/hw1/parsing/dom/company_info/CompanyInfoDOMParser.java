@@ -18,6 +18,8 @@ import java.io.File;
 import java.io.IOException;
 
 /**
+ * Parses the company_info.xml into a DOM tree and then maps it into a POJO
+ *
  * @author Kim Hammar on 2017-01-26.
  */
 public class CompanyInfoDOMParser {
@@ -29,11 +31,24 @@ public class CompanyInfoDOMParser {
     private Schema companyInfoSchema;
     private Document companyInfoDocument;
 
+    /**
+     * Class constructor
+     *
+     * @param schemaFactory
+     * @param documentBuilderFactory
+     */
     public CompanyInfoDOMParser(SchemaFactory schemaFactory, DocumentBuilderFactory documentBuilderFactory) {
         this.documentBuilderFactory = documentBuilderFactory;
         this.schemaFactory = schemaFactory;
     }
 
+    /**
+     * Initializes to prepare for the parsing
+     *
+     * @throws SAXException
+     * @throws ParserConfigurationException
+     * @throws IOException
+     */
     public void init() throws SAXException, ParserConfigurationException, IOException {
         companyInfoSchema = schemaFactory.newSchema(new File(SCHEMA));
         documentBuilderFactory.setNamespaceAware(true);
@@ -42,6 +57,12 @@ public class CompanyInfoDOMParser {
         companyInfoDocument = documentBuilder.parse(new File(DOCUMENT));
     }
 
+    /**
+     * Parsres the company_info.xml into a DOM tree and maps it into a POJO
+     *
+     * @return CompaniesInfo POJO
+     * @throws DatatypeConfigurationException
+     */
     public CompaniesInfo createPOJO() throws DatatypeConfigurationException {
         ObjectFactory objectFactory = new ObjectFactory();
         CompaniesInfo companiesInfo = objectFactory.createCompaniesInfo();

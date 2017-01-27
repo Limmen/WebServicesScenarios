@@ -12,12 +12,23 @@ import javax.xml.validation.SchemaFactory;
 import java.io.IOException;
 
 /**
+ * DOMParser
+ *
  * @author Kim Hammar on 2017-01-26.
  */
 public class DOMParser {
     private static final SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
     private static final DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 
+    /**
+     * Parses the company_info.xml into DOM-tree and then maps it into a POJO
+     *
+     * @return CompaniesInfo object
+     * @throws IOException
+     * @throws SAXException
+     * @throws ParserConfigurationException
+     * @throws DatatypeConfigurationException
+     */
     public CompaniesInfo parseCompaniesInfo() throws IOException, SAXException, ParserConfigurationException, DatatypeConfigurationException {
         CompanyInfoDOMParser companyInfoDOMParser = new CompanyInfoDOMParser(schemaFactory, documentBuilderFactory);
         companyInfoDOMParser.init();

@@ -19,6 +19,9 @@ import javax.xml.transform.TransformerException;
 import java.io.IOException;
 
 /**
+ * Main Parser API for this homework. Uses DOMParser, JAXParser, PojoMerger, XSLTParser and generated POJO classes
+ * to provide two API calls for parsing the application_profile in different ways.
+ *
  * @author Kim Hammar on 2017-01-26.
  */
 public class Parser {
@@ -28,6 +31,10 @@ public class Parser {
     private final PojoMerger pojoMerger = new PojoMerger();
     private final XSLTParser xsltParser = new XSLTParser();
 
+    /**
+     * Parses the different xml files (short_cv, employment_record, company_info, transcript) with SAX, JAX, DOM
+     * into in-memory datastructures, transforms it, and finally produces the application_profile_generated_task1.xml file
+     */
     public void parseWithDOM_SAX_JAXB(){
         try {
             CompaniesInfo companiesInfo = domParser.parseCompaniesInfo();
@@ -43,15 +50,15 @@ public class Parser {
 
     }
 
-    public void combineWithXSLT(){
+    /**
+     * Parses and transforms the different xml files (short_cv, employment_record, company_info, transcript) with XSLT
+     * and produces the application_profile_generated_task2.xml
+     */
+    public void buildWithXSLT(){
         try {
             xsltParser.combineApplicationProfile();
         } catch (TransformerException e) {
             e.printStackTrace();
         }
-    }
-
-    public void buildWithXSLT(){
-
     }
 }

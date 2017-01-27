@@ -11,6 +11,8 @@ import javax.xml.validation.SchemaFactory;
 import java.io.File;
 
 /**
+ * Parses the transcript.xml file with JAXB into an in-memory POJO representation
+ *
  * @author Kim Hammar on 2017-01-26.
  */
 public class TranscriptJAXBParser {
@@ -22,10 +24,21 @@ public class TranscriptJAXBParser {
     private Schema transcriptSchema;
     private Unmarshaller unmarshaller;
 
+    /**
+     * Class constructor
+     *
+     * @param schemaFactory
+     */
     public TranscriptJAXBParser(SchemaFactory schemaFactory) {
         this.schemaFactory = schemaFactory;
     }
 
+    /**
+     * Initialization to prepare for parsing
+     *
+     * @throws SAXException
+     * @throws JAXBException
+     */
     public void init() throws SAXException, JAXBException {
         transcriptSchema = schemaFactory.newSchema(new File(SCHEMA));
         transcriptDocument = new File(DOCUMENT);
@@ -34,6 +47,12 @@ public class TranscriptJAXBParser {
         unmarshaller.setSchema(transcriptSchema);
     }
 
+    /**
+     * Unmarshalls the XML document into an in-memory representation
+     *
+     * @return Transcript Object
+     * @throws JAXBException
+     */
     public Transcript createPOJO() throws JAXBException {
         return (Transcript) unmarshaller.unmarshal(transcriptDocument);
     }

@@ -11,12 +11,22 @@ import javax.xml.validation.SchemaFactory;
 import java.io.IOException;
 
 /**
+ * SAXParser, uses SAXPArserFactory to parse XML files with SAX
+ *
  * @author Kim Hammar on 2017-01-26.
  */
 public class SAXParser {
     private static final SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
     private static final SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
 
+    /**
+     * Parses the employmen_record.xml into in-memory POJO
+     *
+     * @return employmentrecord, result of parsing file into POJO
+     * @throws ParserConfigurationException
+     * @throws SAXException
+     * @throws IOException
+     */
     public EmploymentRecord parseEmploymentRecord() throws ParserConfigurationException, SAXException, IOException {
         EmploymentRecordSAXParser employmentRecordSAXParser = new EmploymentRecordSAXParser(schemaFactory, saxParserFactory);
         employmentRecordSAXParser.init();

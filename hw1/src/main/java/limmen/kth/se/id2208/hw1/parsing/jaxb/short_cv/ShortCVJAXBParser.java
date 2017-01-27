@@ -11,6 +11,8 @@ import javax.xml.validation.SchemaFactory;
 import java.io.File;
 
 /**
+ * Parses the short_cv.xml file with JAXB into an in-memory POJO representation
+ *
  * @author Kim Hammar on 2017-01-26.
  */
 public class ShortCVJAXBParser {
@@ -22,10 +24,21 @@ public class ShortCVJAXBParser {
     private Schema shortCVSchema;
     private Unmarshaller unmarshaller;
 
+    /**
+     * Class constructor
+     *
+     * @param schemaFactory
+     */
     public ShortCVJAXBParser(SchemaFactory schemaFactory) {
         this.schemaFactory = schemaFactory;
     }
 
+    /**
+     * Initialization to prepare for the unmarshalling
+     *
+     * @throws SAXException
+     * @throws JAXBException
+     */
     public void init() throws SAXException, JAXBException {
         shortCVSchema = schemaFactory.newSchema(new File(SCHEMA));
         shortCVDocument = new File(DOCUMENT);
@@ -34,6 +47,12 @@ public class ShortCVJAXBParser {
         unmarshaller.setSchema(shortCVSchema);
     }
 
+    /**
+     * Unmarshals short_cv.xml into an in-memory representation
+     *
+     * @return Object representation of short_cv.xml
+     * @throws JAXBException
+     */
     public ShortCV createPOJO() throws JAXBException {
         return (ShortCV) unmarshaller.unmarshal(shortCVDocument);
     }

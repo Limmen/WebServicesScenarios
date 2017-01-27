@@ -2,12 +2,14 @@ package limmen.kth.se.id2208.hw1.parsing.sax.employment_record;
 
 import limmen.kth.se.id2208.hw1.parsing.generated_pojos.employment_record.EmploymentRecord;
 import limmen.kth.se.id2208.hw1.parsing.generated_pojos.employment_record.ObjectFactory;
-import org.xml.sax.*;
+import org.xml.sax.Attributes;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.DefaultHandler;
 
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
-import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -16,12 +18,14 @@ import javax.xml.validation.SchemaFactory;
 import java.io.*;
 
 /**
+ *
+ * Uses SAX API to parse employment_record.xml
+ *
  * @author Kim Hammar on 2017-01-26.
  */
 public class EmploymentRecordSAXParser {
     private final SchemaFactory schemaFactory;
     private final SAXParserFactory saxParserFactory;
-    private DocumentBuilder documentBuilder;
     private static final String SCHEMA = "xml/schemas/employment_record.xsd";
     private static final String DOCUMENT = "xml/documents/employment_record.xml";
     private Schema employmentRecordSchema;
@@ -31,11 +35,23 @@ public class EmploymentRecordSAXParser {
     private EmploymentRecord employmentRecord;
     private ObjectFactory objectFactory;
 
+    /**
+     * Class constructor
+     *
+     * @param schemaFactory
+     * @param saxParserFactory
+     */
     public EmploymentRecordSAXParser(SchemaFactory schemaFactory, SAXParserFactory saxParserFactory) {
         this.schemaFactory = schemaFactory;
         this.saxParserFactory = saxParserFactory;
     }
 
+    /**
+     * Initialization to prepare for parsing
+     *
+     * @throws SAXException
+     * @throws ParserConfigurationException
+     */
     public void init() throws SAXException, ParserConfigurationException {
         employmentRecordSchema = schemaFactory.newSchema(new File(SCHEMA));
         employmentRecordDocument = new File(DOCUMENT);
@@ -46,6 +62,13 @@ public class EmploymentRecordSAXParser {
         xmlReader.setContentHandler(new MainHandler());
     }
 
+    /**
+     * Parses the file into a POJO
+     *
+     * @return EmploymentRecord employmentRecord
+     * @throws IOException
+     * @throws SAXException
+     */
     public EmploymentRecord createPOJO() throws IOException, SAXException {
         objectFactory = new ObjectFactory();
         employmentRecord = objectFactory.createEmploymentRecord();
@@ -57,6 +80,9 @@ public class EmploymentRecordSAXParser {
         return employmentRecord;
     }
 
+    /**
+     * Main handler for the SAX parsing
+     */
     private class MainHandler extends DefaultHandler {
         private EmploymentRecord.Employee employee;
         private EmploymentRecord.EmploymentHistory employmentHistory;
@@ -71,6 +97,9 @@ public class EmploymentRecordSAXParser {
         boolean employmentCompany = false;
         boolean employmentTitle = false;
 
+        /**
+         * Called at the beginning of document
+         */
         @Override
         public void startDocument() {
             employee = objectFactory.createEmploymentRecordEmployee();
@@ -78,6 +107,15 @@ public class EmploymentRecordSAXParser {
             employment = objectFactory.createEmploymentRecordEmploymentHistoryEmployment();
         }
 
+        /**
+         * Called at the beginning of an element.
+         *
+         * @param namespaceURI
+         * @param localName
+         * @param qName
+         * @param atts
+         * @throws SAXException
+         */
         @Override
         public void startElement(String namespaceURI, String localName, String qName, Attributes atts) throws SAXException {
             if (qName.equalsIgnoreCase("FirstName")) {
@@ -106,12 +144,22 @@ public class EmploymentRecordSAXParser {
             }
         }
 
+        /**
+         *  Called at the end of an element.
+         */
         @Override
         public void endDocument(){
             employmentRecord.setEmployee(employee);
             employmentRecord.setEmploymentHistory(employmentHistory);
         }
 
+        /**
+         * Called when character data is encountered.
+         * @param ch
+         * @param start
+         * @param length
+         * @throws SAXException
+         */
         @Override
         public void characters(char ch[], int start, int length) throws SAXException {
 

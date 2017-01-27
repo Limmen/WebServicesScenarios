@@ -9,22 +9,34 @@ import javax.xml.transform.stream.StreamSource;
 import java.io.File;
 
 /**
+ * Combines the reduced xml files into application_generated_task2.xml
+ *
  * @author Kim Hammar on 2017-01-27.
  */
 public class ApplicationProfileXSLTCombiner {
     private final TransformerFactory transformerFactory;
     private static final String XML_SOURCE = "xml/documents/reduced_transcript.xml";
     private static final String STYLESHEET = "xml/stylesheets/application_profile_combine.xsl";
-    private static final String OUTPUT = "xml/documents/application_profile_generated_task2_combined.xml";
+    private static final String OUTPUT = "xml/documents/application_profile_generated_task2.xml";
     private StreamSource xmlSource;
     private StreamSource stylesheet;
     private StreamResult streamResult;
     private Transformer transformer;
 
+    /**
+     * Class constructor
+     *
+     * @param transformerFactory
+     */
     public ApplicationProfileXSLTCombiner(TransformerFactory transformerFactory){
         this.transformerFactory = transformerFactory;
     }
 
+    /**
+     * Initizialization to prepare for transformations
+     *
+     * @throws TransformerConfigurationException
+     */
     public void init() throws TransformerConfigurationException {
         xmlSource = new StreamSource(new File(XML_SOURCE));
         stylesheet = new StreamSource(new File(STYLESHEET));
@@ -32,6 +44,10 @@ public class ApplicationProfileXSLTCombiner {
         transformer = transformerFactory.newTransformer(stylesheet);
     }
 
+    /**
+     * Performs the transformation and combines the documents into application_generated_task2.xml
+     * @throws TransformerException
+     */
     public void combine() throws TransformerException {
         transformer.transform(xmlSource, streamResult);
     }

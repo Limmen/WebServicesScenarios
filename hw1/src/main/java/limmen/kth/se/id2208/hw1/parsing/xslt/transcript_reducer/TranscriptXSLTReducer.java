@@ -9,6 +9,9 @@ import javax.xml.transform.stream.StreamSource;
 import java.io.File;
 
 /**
+ * Transforms the transcript.xml document and only keeps the information relevant to application_profile.xml, also
+ * computes and adds the GPA for each degree.
+ *
  * @author Kim Hammar on 2017-01-27.
  */
 public class TranscriptXSLTReducer {
@@ -21,10 +24,21 @@ public class TranscriptXSLTReducer {
     private StreamResult streamResult;
     private Transformer transformer;
 
+    /**
+     * Class constructor for initialization
+     *
+     * @param transformerFactory
+     */
+
     public TranscriptXSLTReducer(TransformerFactory transformerFactory){
         this.transformerFactory = transformerFactory;
     }
 
+    /**
+     * Initialization to set up things before transformations
+     *
+     * @throws TransformerConfigurationException
+     */
     public void init() throws TransformerConfigurationException {
         xmlSource = new StreamSource(new File(XML_SOURCE));
         stylesheet = new StreamSource(new File(STYLESHEET));
@@ -32,6 +46,11 @@ public class TranscriptXSLTReducer {
         transformer = transformerFactory.newTransformer(stylesheet);
     }
 
+    /**
+     * Performs the actual transformation and writes it to reduced_transcript.xml
+     *
+     * @throws TransformerException
+     */
     public void reduce() throws TransformerException {
         transformer.transform(xmlSource, streamResult);
     }

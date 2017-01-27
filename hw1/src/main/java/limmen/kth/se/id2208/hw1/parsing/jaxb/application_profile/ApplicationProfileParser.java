@@ -11,6 +11,8 @@ import javax.xml.validation.SchemaFactory;
 import java.io.File;
 
 /**
+ * Marshalls the ApplicationProfile in-memory representation into application_profile_generated_task1.xml
+ *
  * @author Kim Hammar on 2017-01-26.
  */
 public class ApplicationProfileParser {
@@ -24,10 +26,20 @@ public class ApplicationProfileParser {
     private File applicationProfileDocument;
     private Marshaller marshaller;
 
+    /**
+     * Class constructor
+     * @param schemaFactory
+     */
     public ApplicationProfileParser(SchemaFactory schemaFactory) {
         this.schemaFactory = schemaFactory;
     }
 
+    /**
+     * Initialization to prepare for the marshalling
+     *
+     * @throws SAXException
+     * @throws JAXBException
+     */
     public void init() throws SAXException, JAXBException {
         applicationProfileSchema = schemaFactory.newSchema(new File(SCHEMA));
         applicationProfileDocument = new File(DOCUMENT);
@@ -39,6 +51,12 @@ public class ApplicationProfileParser {
         marshaller.setProperty(Marshaller.JAXB_SCHEMA_LOCATION, NAMESPACE + " " + RELATIVE_SCHEMA);
     }
 
+    /**
+     * Marshalls the ApplicationProfile object into application_profile_generated_task1.xml
+     *
+     * @param applicationProfile
+     * @throws JAXBException
+     */
     public void generateApplicationProfileDocument(ApplicationProfile applicationProfile) throws JAXBException {
         marshaller.marshal(applicationProfile, applicationProfileDocument);
     }

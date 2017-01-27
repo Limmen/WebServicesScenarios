@@ -8,10 +8,22 @@ import limmen.kth.se.id2208.hw1.parsing.generated_pojos.short_cv.ShortCV;
 import limmen.kth.se.id2208.hw1.parsing.generated_pojos.transcript.Transcript;
 
 /**
+ * Uses the resulting POJO's from parsing the XML files and then extracts the relevant informatio and produces a
+ *  corresponding POJO for the application_profile
+ *
  * @author Kim Hammar on 2017-01-26.
  */
 public class PojoMerger {
 
+    /**
+     * Merges the generated POJOs into ApplicationProfilePojo with only the relevant information
+     *
+     * @param shortCV POJO for the short_cv.xml file
+     * @param transcript POJO for the transcript.xml file
+     * @param employmentRecord POJO for the employment_receord.xml file
+     * @param companiesInfo POJO for the company_infor.xml file
+     * @return
+     */
     public ApplicationProfile mergePojosToApplicationProfile(ShortCV shortCV, Transcript transcript, EmploymentRecord employmentRecord, CompaniesInfo companiesInfo) {
         ObjectFactory objectFactory = new ObjectFactory();
         ApplicationProfile applicationProfile = objectFactory.createApplicationProfile();
