@@ -14,8 +14,11 @@ public class Startup {
      * @param args
      */
     public static void main(String[] args) {
+        System.out.println("Parsing");
         Parser parser = new Parser();
         parser.parseWithDOM_SAX_JAXB();
         parser.buildWithXSLT();
+        System.out.println("Parsing done\n see xml/documents/application_profile_generated_task1.xml \n and "  +
+                "xml/documents/application_profile_generated_task2.xml");
     }
 }
