@@ -82,11 +82,15 @@ When designing the XML schemas I used the following practices:
 \item Constrain types as much as possible to enforce strict XML documents that is easy to parse and validate.
 \item Always use namespaces and qualified names to avoid confusion, e.g impose qualified names for  both local and global elements by  adding: \texttt{elementFormDefault="qualified"} to the schema. To avoid very verbose documents, use default namespaces, as advised in the coursebook:
   \begin{quote}
-    \textit{Prefixing every element in the document decreases readability and increases document size}\citep{coursebook}
+    \textit{Adding a prefix to every element in the document decreases readability and increases document size. Therefore, XML Namespaces lets you use a default namespace in a document.
+    Elements belonging to the default namespace don't require prefixes.} Page 48, \citep{coursebook}
   \end{quote}
 \end{itemize}
 
-To be able to later caculate GPA's from the transcript document it is necessary to link courses to degrees. This was done by using \textit{Key/Keyref} mechanisms available in the XML schema standard. \textit{Key/Keyref} reminds of primary/foreign keys of relational databases. This was used as follows to link degrees to courses:
+Apart from following best practices, the main importance when designing the schema was to remember to add linking between courses and degrees in the transcript XML document.
+This is necessary to later be able to calculate GPA's for the degrees but still allow flexibility that courses can be in the transcript without belonging to a degree.
+I used \textit{Key/Keyref} mechanisms available in XML schema standard to do this, Key/Keyref is very similar to the notion of primary/foreign keys in relational databases, the listings below
+show how they were used.
 
 \lstset{language=XML}
 \begin{lstlisting}[frame=single,style=base]
