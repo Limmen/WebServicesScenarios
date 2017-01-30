@@ -11,6 +11,9 @@ import java.io.File;
 /**
  *  Transforms the short_cv.xml document and only keeps the information relevant to application_profile.xml.
  *
+ * This class simply uses the Transformer class from javax.xml.transform package to transform
+ * a given source-tree into a result-tree and finally to output result into a XML file.
+ *
  * @author Kim Hammar on 2017-01-27.
  */
 public class ShortCVXSLTReducer {

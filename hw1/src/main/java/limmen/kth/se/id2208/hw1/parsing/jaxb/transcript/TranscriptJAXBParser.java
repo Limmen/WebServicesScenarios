@@ -1,6 +1,7 @@
 package limmen.kth.se.id2208.hw1.parsing.jaxb.transcript;
 
-import limmen.kth.se.id2208.hw1.parsing.generated_pojos.transcript.Transcript;
+import limmen.kth.se.id2208.hw1.java_mappings.generated_pojos.transcript.Transcript;
+import limmen.kth.se.id2208.hw1.validation.SchemaValidator;
 import org.xml.sax.SAXException;
 
 import javax.xml.bind.JAXBContext;
@@ -11,7 +12,9 @@ import javax.xml.validation.SchemaFactory;
 import java.io.File;
 
 /**
- * Parses the transcript.xml file with JAXB into an in-memory POJO representation
+ * Parses the transcript.xml file with JAXB into an in-memory POJO representation.
+ * This class simply uses the ready Unmarhaller from JAXB Context to unmarshall the XML file into
+ * a Java POJO.
  *
  * @author Kim Hammar on 2017-01-26.
  */
@@ -40,6 +43,7 @@ public class TranscriptJAXBParser {
      * @throws JAXBException
      */
     public void init() throws SAXException, JAXBException {
+        SchemaValidator.validate(SCHEMA, DOCUMENT);
         transcriptSchema = schemaFactory.newSchema(new File(SCHEMA));
         transcriptDocument = new File(DOCUMENT);
         jaxbContext = JAXBContext.newInstance(Transcript.class);

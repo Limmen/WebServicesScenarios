@@ -1,6 +1,6 @@
 package limmen.kth.se.id2208.hw1.parsing.sax;
 
-import limmen.kth.se.id2208.hw1.parsing.generated_pojos.employment_record.EmploymentRecord;
+import limmen.kth.se.id2208.hw1.java_mappings.generated_pojos.employment_record.EmploymentRecord;
 import limmen.kth.se.id2208.hw1.parsing.sax.employment_record.EmploymentRecordSAXParser;
 import org.xml.sax.SAXException;
 

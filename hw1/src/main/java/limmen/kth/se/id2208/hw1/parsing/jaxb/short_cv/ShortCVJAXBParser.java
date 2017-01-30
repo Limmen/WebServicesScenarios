@@ -1,6 +1,7 @@
 package limmen.kth.se.id2208.hw1.parsing.jaxb.short_cv;
 
-import limmen.kth.se.id2208.hw1.parsing.generated_pojos.short_cv.ShortCV;
+import limmen.kth.se.id2208.hw1.java_mappings.generated_pojos.short_cv.ShortCV;
+import limmen.kth.se.id2208.hw1.validation.SchemaValidator;
 import org.xml.sax.SAXException;
 
 import javax.xml.bind.JAXBContext;
@@ -12,6 +13,8 @@ import java.io.File;
 
 /**
  * Parses the short_cv.xml file with JAXB into an in-memory POJO representation
+ * This class simply uses the ready Unmarshaller created by the JAXB Context to unmarshall the xml file
+ * into java-pojo.
  *
  * @author Kim Hammar on 2017-01-26.
  */
@@ -40,6 +43,7 @@ public class ShortCVJAXBParser {
      * @throws JAXBException
      */
     public void init() throws SAXException, JAXBException {
+        SchemaValidator.validate(SCHEMA, DOCUMENT);
         shortCVSchema = schemaFactory.newSchema(new File(SCHEMA));
         shortCVDocument = new File(DOCUMENT);
         jaxbContext = JAXBContext.newInstance(ShortCV.class);

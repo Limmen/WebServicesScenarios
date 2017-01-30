@@ -1,7 +1,7 @@
 package limmen.kth.se.id2208.hw1.parsing.dom;
 
 import limmen.kth.se.id2208.hw1.parsing.dom.company_info.CompanyInfoDOMParser;
-import limmen.kth.se.id2208.hw1.parsing.generated_pojos.company_info.CompaniesInfo;
+import limmen.kth.se.id2208.hw1.java_mappings.generated_pojos.company_info.CompaniesInfo;
 import org.xml.sax.SAXException;
 
 import javax.xml.XMLConstants;

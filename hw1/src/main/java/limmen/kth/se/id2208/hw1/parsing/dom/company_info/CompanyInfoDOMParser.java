@@ -1,7 +1,8 @@
 package limmen.kth.se.id2208.hw1.parsing.dom.company_info;
 
-import limmen.kth.se.id2208.hw1.parsing.generated_pojos.company_info.CompaniesInfo;
-import limmen.kth.se.id2208.hw1.parsing.generated_pojos.company_info.ObjectFactory;
+import limmen.kth.se.id2208.hw1.java_mappings.generated_pojos.company_info.CompaniesInfo;
+import limmen.kth.se.id2208.hw1.java_mappings.generated_pojos.company_info.ObjectFactory;
+import limmen.kth.se.id2208.hw1.validation.SchemaValidator;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -18,7 +19,9 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * Parses the company_info.xml into a DOM tree and then maps it into a POJO
+ * Parses the company_info.xml into a DOM tree and then maps it into a POJO.
+ * This class simply uses the DocumentBuilderFactory that gives a ready-parser that produces DOM object trees
+ *
  *
  * @author Kim Hammar on 2017-01-26.
  */
@@ -50,15 +53,16 @@ public class CompanyInfoDOMParser {
      * @throws IOException
      */
     public void init() throws SAXException, ParserConfigurationException, IOException {
+        SchemaValidator.validate(SCHEMA, DOCUMENT);
         companyInfoSchema = schemaFactory.newSchema(new File(SCHEMA));
-        documentBuilderFactory.setNamespaceAware(true);
+        documentBuilderFactory.setNamespaceAware(true); //Specifies that produced parser will provide support for XML namespaces
         documentBuilderFactory.setSchema(companyInfoSchema);
         documentBuilder = documentBuilderFactory.newDocumentBuilder();
         companyInfoDocument = documentBuilder.parse(new File(DOCUMENT));
     }
 
     /**
-     * Parsres the company_info.xml into a DOM tree and maps it into a POJO
+     * Parses the company_info.xml into a DOM tree and maps it into a POJO
      *
      * @return CompaniesInfo POJO
      * @throws DatatypeConfigurationException

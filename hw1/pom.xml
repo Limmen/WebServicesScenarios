@@ -22,7 +22,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>limmen.kth.se.id2208.hw1.parsing.Startup</mainClass>
+                            <mainClass>limmen.kth.se.id2208.hw1.Startup</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>

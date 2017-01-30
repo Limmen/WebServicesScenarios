@@ -1,7 +1,8 @@
 package limmen.kth.se.id2208.hw1.parsing.sax.employment_record;
 
-import limmen.kth.se.id2208.hw1.parsing.generated_pojos.employment_record.EmploymentRecord;
-import limmen.kth.se.id2208.hw1.parsing.generated_pojos.employment_record.ObjectFactory;
+import limmen.kth.se.id2208.hw1.java_mappings.generated_pojos.employment_record.EmploymentRecord;
+import limmen.kth.se.id2208.hw1.java_mappings.generated_pojos.employment_record.ObjectFactory;
+import limmen.kth.se.id2208.hw1.validation.SchemaValidator;
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -19,7 +20,9 @@ import java.io.*;
 
 /**
  *
- * Uses SAX API to parse employment_record.xml
+ * Uses SAX API to parse employment_record.xml.
+ * This class simply uses the XMLReader provided by SAX for parsing the XML docuemnt through callbacks.
+ * Callbacks for the relevant events are provided in the class.
  *
  * @author Kim Hammar on 2017-01-26.
  */
@@ -53,6 +56,7 @@ public class EmploymentRecordSAXParser {
      * @throws ParserConfigurationException
      */
     public void init() throws SAXException, ParserConfigurationException {
+        SchemaValidator.validate(SCHEMA, DOCUMENT);
         employmentRecordSchema = schemaFactory.newSchema(new File(SCHEMA));
         employmentRecordDocument = new File(DOCUMENT);
         saxParserFactory.setNamespaceAware(true);
@@ -155,6 +159,7 @@ public class EmploymentRecordSAXParser {
 
         /**
          * Called when character data is encountered.
+         *
          * @param ch
          * @param start
          * @param length

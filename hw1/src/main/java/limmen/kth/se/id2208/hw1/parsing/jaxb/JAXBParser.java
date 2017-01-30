@@ -1,8 +1,8 @@
 package limmen.kth.se.id2208.hw1.parsing.jaxb;
 
-import limmen.kth.se.id2208.hw1.parsing.generated_pojos.application_profile.ApplicationProfile;
-import limmen.kth.se.id2208.hw1.parsing.generated_pojos.short_cv.ShortCV;
-import limmen.kth.se.id2208.hw1.parsing.generated_pojos.transcript.Transcript;
+import limmen.kth.se.id2208.hw1.java_mappings.generated_pojos.application_profile.ApplicationProfile;
+import limmen.kth.se.id2208.hw1.java_mappings.generated_pojos.short_cv.ShortCV;
+import limmen.kth.se.id2208.hw1.java_mappings.generated_pojos.transcript.Transcript;
 import limmen.kth.se.id2208.hw1.parsing.jaxb.application_profile.ApplicationProfileParser;
 import limmen.kth.se.id2208.hw1.parsing.jaxb.short_cv.ShortCVJAXBParser;
 import limmen.kth.se.id2208.hw1.parsing.jaxb.transcript.TranscriptJAXBParser;
