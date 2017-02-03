@@ -14,6 +14,7 @@ public class Flight {
     public Flight(String departmentCity, String destinationCity) {
         this.departmentCity = departmentCity;
         this.destinationCity = destinationCity;
+        System.out.println("hi");
     }
 
     public String getDepartmentCity() {
