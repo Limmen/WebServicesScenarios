@@ -1,11 +1,13 @@
 
 package client;
 
+import java.util.List;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
 import javax.jws.WebService;
 import javax.xml.bind.annotation.XmlSeeAlso;
+import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.ws.Action;
 import javax.xml.ws.FaultAction;
 import javax.xml.ws.RequestWrapper;
@@ -27,18 +29,54 @@ public interface FlightTicketReservationService {
 
     /**
      * 
-     * @param arg0
      * @return
-     *     returns java.lang.String
+     *     returns client.Flight
      */
     @WebMethod
     @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "sayHelloWorldFrom", targetNamespace = "http://flight_reservation", className = "client.SayHelloWorldFrom")
-    @ResponseWrapper(localName = "sayHelloWorldFromResponse", targetNamespace = "http://flight_reservation", className = "client.SayHelloWorldFromResponse")
-    @Action(input = "http://flight_reservation/FlightTicketReservationService/sayHelloWorldFromRequest", output = "http://flight_reservation/FlightTicketReservationService/sayHelloWorldFromResponse")
-    public String sayHelloWorldFrom(
+    @RequestWrapper(localName = "getFlight", targetNamespace = "http://flight_reservation", className = "client.GetFlight")
+    @ResponseWrapper(localName = "getFlightResponse", targetNamespace = "http://flight_reservation", className = "client.GetFlightResponse")
+    @Action(input = "http://flight_reservation/FlightTicketReservationService/getFlightRequest", output = "http://flight_reservation/FlightTicketReservationService/getFlightResponse")
+    public Flight getFlight();
+
+    /**
+     * 
+     * @return
+     *     returns java.util.List<client.Flight>
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getFlights", targetNamespace = "http://flight_reservation", className = "client.GetFlights")
+    @ResponseWrapper(localName = "getFlightsResponse", targetNamespace = "http://flight_reservation", className = "client.GetFlightsResponse")
+    @Action(input = "http://flight_reservation/FlightTicketReservationService/getFlightsRequest", output = "http://flight_reservation/FlightTicketReservationService/getFlightsResponse")
+    public List<Flight> getFlights();
+
+    /**
+     * 
+     * @return
+     *     returns java.util.List<client.Initiary>
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getInitiaries2", targetNamespace = "http://flight_reservation", className = "client.GetInitiaries2")
+    @ResponseWrapper(localName = "getInitiaries2Response", targetNamespace = "http://flight_reservation", className = "client.GetInitiaries2Response")
+    @Action(input = "http://flight_reservation/FlightTicketReservationService/getInitiaries2Request", output = "http://flight_reservation/FlightTicketReservationService/getInitiaries2Response")
+    public List<Initiary> getInitiaries2();
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns java.util.List<client.Initiary>
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getInitiaries3", targetNamespace = "http://flight_reservation", className = "client.GetInitiaries3")
+    @ResponseWrapper(localName = "getInitiaries3Response", targetNamespace = "http://flight_reservation", className = "client.GetInitiaries3Response")
+    @Action(input = "http://flight_reservation/FlightTicketReservationService/getInitiaries3Request", output = "http://flight_reservation/FlightTicketReservationService/getInitiaries3Response")
+    public List<Initiary> getInitiaries3(
         @WebParam(name = "arg0", targetNamespace = "")
-        String arg0);
+        List<Initiary> arg0);
 
     /**
      * 
@@ -58,6 +96,127 @@ public interface FlightTicketReservationService {
     public String login(
         @WebParam(name = "arg0", targetNamespace = "")
         String arg0,
+        @WebParam(name = "arg1", targetNamespace = "")
+        String arg1)
+        throws AuthorizationException_Exception
+    ;
+
+    /**
+     * 
+     * @param arg2
+     * @param arg1
+     * @param arg0
+     * @return
+     *     returns java.util.List<client.Initiary>
+     * @throws AuthorizationException_Exception
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getInitiaries", targetNamespace = "http://flight_reservation", className = "client.GetInitiaries")
+    @ResponseWrapper(localName = "getInitiariesResponse", targetNamespace = "http://flight_reservation", className = "client.GetInitiariesResponse")
+    @Action(input = "http://flight_reservation/FlightTicketReservationService/getInitiariesRequest", output = "http://flight_reservation/FlightTicketReservationService/getInitiariesResponse", fault = {
+        @FaultAction(className = AuthorizationException_Exception.class, value = "http://flight_reservation/FlightTicketReservationService/getInitiaries/Fault/AuthorizationException")
+    })
+    public List<Initiary> getInitiaries(
+        @WebParam(name = "arg0", targetNamespace = "")
+        String arg0,
+        @WebParam(name = "arg1", targetNamespace = "")
+        String arg1,
+        @WebParam(name = "arg2", targetNamespace = "")
+        String arg2)
+        throws AuthorizationException_Exception
+    ;
+
+    /**
+     * 
+     * @param arg2
+     * @param arg1
+     * @param arg0
+     * @return
+     *     returns java.util.List<client.Ticket>
+     * @throws AuthorizationException_Exception
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getAvailableTickets", targetNamespace = "http://flight_reservation", className = "client.GetAvailableTickets")
+    @ResponseWrapper(localName = "getAvailableTicketsResponse", targetNamespace = "http://flight_reservation", className = "client.GetAvailableTicketsResponse")
+    @Action(input = "http://flight_reservation/FlightTicketReservationService/getAvailableTicketsRequest", output = "http://flight_reservation/FlightTicketReservationService/getAvailableTicketsResponse", fault = {
+        @FaultAction(className = AuthorizationException_Exception.class, value = "http://flight_reservation/FlightTicketReservationService/getAvailableTickets/Fault/AuthorizationException")
+    })
+    public List<Ticket> getAvailableTickets(
+        @WebParam(name = "arg0", targetNamespace = "")
+        XMLGregorianCalendar arg0,
+        @WebParam(name = "arg1", targetNamespace = "")
+        Initiary arg1,
+        @WebParam(name = "arg2", targetNamespace = "")
+        String arg2)
+        throws AuthorizationException_Exception
+    ;
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns java.util.List<client.PriceEntry>
+     * @throws AuthorizationException_Exception
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getPriceList", targetNamespace = "http://flight_reservation", className = "client.GetPriceList")
+    @ResponseWrapper(localName = "getPriceListResponse", targetNamespace = "http://flight_reservation", className = "client.GetPriceListResponse")
+    @Action(input = "http://flight_reservation/FlightTicketReservationService/getPriceListRequest", output = "http://flight_reservation/FlightTicketReservationService/getPriceListResponse", fault = {
+        @FaultAction(className = AuthorizationException_Exception.class, value = "http://flight_reservation/FlightTicketReservationService/getPriceList/Fault/AuthorizationException")
+    })
+    public List<PriceEntry> getPriceList(
+        @WebParam(name = "arg0", targetNamespace = "")
+        String arg0)
+        throws AuthorizationException_Exception
+    ;
+
+    /**
+     * 
+     * @param arg2
+     * @param arg1
+     * @param arg0
+     * @return
+     *     returns client.Receipt
+     * @throws AuthorizationException_Exception
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "bookTickets", targetNamespace = "http://flight_reservation", className = "client.BookTickets")
+    @ResponseWrapper(localName = "bookTicketsResponse", targetNamespace = "http://flight_reservation", className = "client.BookTicketsResponse")
+    @Action(input = "http://flight_reservation/FlightTicketReservationService/bookTicketsRequest", output = "http://flight_reservation/FlightTicketReservationService/bookTicketsResponse", fault = {
+        @FaultAction(className = AuthorizationException_Exception.class, value = "http://flight_reservation/FlightTicketReservationService/bookTickets/Fault/AuthorizationException")
+    })
+    public Receipt bookTickets(
+        @WebParam(name = "arg0", targetNamespace = "")
+        int arg0,
+        @WebParam(name = "arg1", targetNamespace = "")
+        List<Ticket> arg1,
+        @WebParam(name = "arg2", targetNamespace = "")
+        String arg2)
+        throws AuthorizationException_Exception
+    ;
+
+    /**
+     * 
+     * @param arg1
+     * @param arg0
+     * @return
+     *     returns java.util.List<client.PurchasedTicket>
+     * @throws AuthorizationException_Exception
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "issueTickets", targetNamespace = "http://flight_reservation", className = "client.IssueTickets")
+    @ResponseWrapper(localName = "issueTicketsResponse", targetNamespace = "http://flight_reservation", className = "client.IssueTicketsResponse")
+    @Action(input = "http://flight_reservation/FlightTicketReservationService/issueTicketsRequest", output = "http://flight_reservation/FlightTicketReservationService/issueTicketsResponse", fault = {
+        @FaultAction(className = AuthorizationException_Exception.class, value = "http://flight_reservation/FlightTicketReservationService/issueTickets/Fault/AuthorizationException")
+    })
+    public List<PurchasedTicket> issueTickets(
+        @WebParam(name = "arg0", targetNamespace = "")
+        Receipt arg0,
         @WebParam(name = "arg1", targetNamespace = "")
         String arg1)
         throws AuthorizationException_Exception

@@ -11,7 +11,7 @@
             implementation='Test'
             url-pattern='/services/Test'/>
     <endpoint
-            name='bottom_up.FlightTicketReservationService'
-            implementation='bottom_up.FlightTicketReservationService'
+            name='kth.se.id2208.bottom_up.FlightTicketReservationService'
+            implementation='kth.se.id2208.bottom_up.FlightTicketReservationService'
             url-pattern='/services/FlightTicketReservationService'/>
 </endpoints>
