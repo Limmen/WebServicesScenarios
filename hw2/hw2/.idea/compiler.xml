@@ -12,6 +12,7 @@
       <entry name="!?*.kt" />
       <entry name="!?*.clj" />
       <entry name="!?*.aj" />
+      <entry name="*?.class" />
     </wildcardResourcePatterns>
     <annotationProcessing>
       <profile default="true" name="Default" enabled="false">
@@ -22,11 +23,11 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
-        <module name="hw1" />
+        <module name="hw2" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="hw1" target="1.7" />
+      <module name="hw2" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>

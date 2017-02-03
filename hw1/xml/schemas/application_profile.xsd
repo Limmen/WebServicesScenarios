@@ -119,7 +119,7 @@
                     </xsd:complexType>
                 </xsd:element>
 
-                <!-- Working experience, collected from employment record and company_info-->
+                <!-- Working experience, collected from employment_record and company_info-->
                 <xsd:element name="WorkingExperience">
                     <xsd:complexType>
                         <xsd:sequence>
