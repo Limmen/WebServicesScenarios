@@ -11,7 +11,6 @@ import javax.jws.WebService;
 import javax.xml.ws.Endpoint;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 
 /**
  * @author Kim Hammar on 2017-02-03.
@@ -50,11 +49,12 @@ public class FlightTicketReservationService {
         return new ArrayList<Ticket>();
     }
 
+    /**
     @WebMethod
     public HashMap<Integer, Ticket> getInitiaryPrice(){
         return new HashMap<Integer, Ticket>();
     }
-
+**/
     @WebMethod
     public Receipt bookTickets(int creditCardNumber, ArrayList<Ticket> tickets){
         return new Receipt();
