@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xsd:schema
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns="http://id2208.se.kth.top_down.FlightTicketReservationService"
+        targetNamespace="http://id2208.se.kth.top_down.FlightTicketReservationService"
+>
+    <xsd:annotation>
+        <xsd:documentation xml:lang="en">
+            This schema defines operations and types used for Login method of the FlightTicketReservationService
+        </xsd:documentation>
+    </xsd:annotation>
+
+    <!-- Login webmethod invocation -->
+    <xsd:element name="Login">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="Username" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Password" type="xsd:string" minOccurs="0"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <!-- Login webmethod response -->
+    <xsd:element name="LoginResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="return" type="xsd:string" minOccurs="0"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>

@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+    <S:Body>
+        <ns2:loginResponse xmlns:ns2="http://flight_reservation"
+                           xmlns:ns3="http://id2208.se.kth.top_down.FlightTicketReservationServiceTopDown">
+            <return>ID2208_AUTH_TOKEN</return>
+        </ns2:loginResponse>
+    </S:Body>
+</S:Envelope>

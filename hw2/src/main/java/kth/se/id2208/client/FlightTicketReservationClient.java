@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 /**
- * WebService Client consuming the FlightTicketReservationService
+ * WebService Client consuming the FlightTicketReservationServiceTopDown
  *
  * @author Kim Hammar on 2017-02-04.
  */

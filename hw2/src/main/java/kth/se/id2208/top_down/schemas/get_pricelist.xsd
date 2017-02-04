@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xsd:schema
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns="http://id2208.se.kth.top_down.FlightTicketReservationService"
+        targetNamespace="http://id2208.se.kth.top_down.FlightTicketReservationService"
+>
+
+    <xsd:import namespace="http://id2208.se.kth.top_down.FlightTicketReservationService"
+                schemaLocation="./get_itineraries.xsd"/>
+
+    <xsd:annotation>
+        <xsd:documentation xml:lang="en">
+            This schema defines operations and types used for GetPriceList method of the FlightTicketReservationService
+        </xsd:documentation>
+    </xsd:annotation>
+
+    <!-- GetPricelist webmethod invocation -->
+    <xsd:element name="GetPriceList">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="SecretToken" type="xsd:string" minOccurs="0"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <!-- GetPricelist webmethod response -->
+    <xsd:element name="GetPriceListResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="return" minOccurs="0" maxOccurs="unbounded">
+                    <!-- PriceEntry type -->
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="Itinerary" type="ItineraryType" minOccurs="0"/>
+                            <xsd:element name="Price" type="xsd:float"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+</xsd:schema>

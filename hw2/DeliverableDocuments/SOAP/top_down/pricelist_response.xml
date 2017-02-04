@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+    <S:Body>
+        <ns2:getPriceListResponse xmlns:ns2="http://flight_reservation"
+                                  xmlns:ns3="http://id2208.se.kth.top_down.FlightTicketReservationServiceTopDown">
+            <return>
+                <Itinerary>
+                    <Flights>
+                        <DepartmentCity>Stockholm</DepartmentCity>
+                        <DestinationCity>Madrid</DestinationCity>
+                    </Flights>
+                </Itinerary>
+                <Price>150.0</Price>
+            </return>
+        </ns2:getPriceListResponse>
+    </S:Body>
+</S:Envelope>

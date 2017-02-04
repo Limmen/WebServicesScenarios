@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Root element, specifies namespaces used. default ns = wsdl,
+     targetnamespace and tns is the namespace of the service itself,
+     soap is uses for defining the binding,
+     xsd is used for defining types of the operations and parameters -->
+<definitions
+        xmlns="http://schemas.xmlsoap.org/wsdl/"
+        targetNamespace="http://id2208.se.kth.top_down.FlightTicketReservationService"
+        name="FlightTicketReservationService"
+        xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+        xmlns:tns="http://id2208.se.kth.top_down.FlightTicketReservationService"
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+>
+
+    <!-- Declare the collection of datatypes used in the WS, parameters, operations etc -->
+    <types>
+        <xsd:schema>
+            <xsd:import namespace="http://id2208.se.kth.top_down.FlightTicketReservationService"
+                        schemaLocation="../schemas/login.xsd"/>
+            <xsd:import namespace="http://id2208.se.kth.top_down.FlightTicketReservationService"
+                        schemaLocation="../schemas/get_itineraries.xsd"/>
+            <xsd:import namespace="http://id2208.se.kth.top_down.FlightTicketReservationService"
+                        schemaLocation="../schemas/get_pricelist.xsd"/>
+            <xsd:import namespace="http://id2208.se.kth.top_down.FlightTicketReservationService"
+                        schemaLocation="../schemas/common.xsd"/>
+        </xsd:schema>
+    </types>
+
+    <!-- Abstract defintion of data/messages, uses as building blocks to declare portTypes (abstract interface).
+     A message contains a set of parts which gives specific information about some unit in the message-->
+
+    <message name="Login">
+        <part name="parameters" element="tns:Login"/>
+    </message>
+    <message name="LoginResponse">
+        <part name="parameters" element="tns:LoginResponse"/>
+    </message>
+    <message name="AuthorizationException">
+        <part name="fault" element="tns:AuthorizationException"/>
+    </message>
+    <message name="GetItineraries">
+        <part name="parameters" element="tns:GetItineraries"/>
+    </message>
+    <message name="GetItinerariesResponse">
+        <part name="parameters" element="tns:GetItinerariesResponse"/>
+    </message>
+    <message name="GetPriceList">
+        <part name="parameters" element="tns:GetPriceList"/>
+    </message>
+    <message name="GetPriceListResponse">
+        <part name="parameters" element="tns:GetPriceListResponse"/>
+    </message>
+
+    <!-- Abstract interface of the webservice, independent of binding and concrete implementation
+     a portType contains a set of operations which constitutes the interface-->
+    <portType name="FlightTicketReservationPortType">
+        <operation name="Login">
+            <input message="tns:Login"/>
+            <output message="tns:LoginResponse"/>
+            <fault message="tns:AuthorizationException" name="AuthorizationException"/>
+        </operation>
+        <operation name="GetItineraries">
+            <input message="tns:GetItineraries"/>
+            <output message="tns:GetItinerariesResponse"/>
+            <fault message="tns:AuthorizationException" name="AuthorizationException"/>
+        </operation>
+        <operation name="GetPriceList">
+            <input message="tns:GetPriceList"/>
+            <output message="tns:GetPriceListResponse"/>
+            <fault message="tns:AuthorizationException" name="AuthorizationException"/>
+        </operation>
+    </portType>
+
+    <!-- Concrete implementation of the portType, defines protocol & dataformats on the wire.
+    Can have multiple supported bindings for the portType-->
+    <binding name="FlightTicketReservationServiceBinding" type="tns:FlightTicketReservationPortType">
+        <!-- Utilize the existing standard binding SOAP over HTTP -->
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <!-- The SOAP binding allows to specify very specific details about soap, e.g headers, body, operation, action etc
+        use='literal' means that operation are literally translated when sent over the wire, this was preferred over
+        SOAP encoding for interoperability reasons. SOAPACtion is required attribute, basicly it is a HTTP-header
+        that indicates to the receiver what the intent of the SOAP HTTP Request is-->
+
+        <!-- Declare how each abstract operation from PortType should be transferred over the wire -->
+        <operation name="Login">
+            <soap:operation soapAction="Login"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+            <fault name="AuthorizationException">
+                <soap:fault name="AuthorizationException" use="literal"/>
+            </fault>
+        </operation>
+
+        <operation name="GetItineraries">
+            <soap:operation soapAction="GetItineraries"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+            <fault name="AuthorizationException">
+                <soap:fault name="AuthorizationException" use="literal"/>
+            </fault>
+        </operation>
+
+        <operation name="GetPriceList">
+            <soap:operation soapAction="GetPriceList"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+            <fault name="AuthorizationException">
+                <soap:fault name="AuthorizationException" use="literal"/>
+            </fault>
+        </operation>
+    </binding>
+
+    <!-- Declares a collection of concrete endpoints in the service and their deployment information which is
+    represented in the "port" element. -->
+    <service name="FlightTicketReservationService">
+        <port name="FlightTicketReservationService" binding="tns:FlightTicketReservationServiceBinding">
+            <soap:address location="http://localhost:9001/kth.se.id2208.top_down.FlightTicketReservationService"/>
+        </port>
+    </service>
+
+</definitions>
+

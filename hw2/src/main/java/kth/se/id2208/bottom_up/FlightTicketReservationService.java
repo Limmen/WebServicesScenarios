@@ -13,11 +13,11 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
- * WebService Endpoint, service: FlightTicketReservationService, implemented with SOAP Binding over HTTP
+ * WebService Endpoint, service: FlightTicketReservationServiceTopDown, implemented with SOAP Binding over HTTP
  *
  * @author Kim Hammar on 2017-02-03.
  */
-@WebService(targetNamespace = "http://flight_reservation", serviceName="FlightTicketReservationService",
+@WebService(targetNamespace = "http://flight_reservation", serviceName="FlightTicketReservationServiceTopDown",
         name="FlightTicketReservationPortType")
 @SOAPBinding(style=SOAPBinding.Style.DOCUMENT,
         use=SOAPBinding.Use.LITERAL,
@@ -130,7 +130,7 @@ public class FlightTicketReservationService {
      */
     public static void main(String[] argv) {
         Object implementor = new FlightTicketReservationService();
-        String address = "http://localhost:9000/kth.se.id2208.bottom_up.FlightTicketReservationService";
+        String address = "http://localhost:9000/kth.se.id2208.bottom_up.FlightTicketReservationServiceTopDown";
         Endpoint.publish(address, implementor);
     }
 }
