@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+    <S:Body>
+        <ns2:getAvailableTickets xmlns:ns2="http://flight_reservation">
+            <arg0>2017-02-04T01:15:29.436+01:00</arg0>
+            <arg1>
+                <Flights>
+                    <DepartmentCity>Stockholm</DepartmentCity>
+                    <DestinationCity>Madrid</DestinationCity>
+                </Flights>
+                <Flights>
+                    <DepartmentCity>Madrid</DepartmentCity>
+                    <DestinationCity>Mumbai</DestinationCity>
+                </Flights>
+            </arg1>
+            <arg2>ID2208_AUTH_TOKEN</arg2>
+        </ns2:getAvailableTickets>
+    </S:Body>
+</S:Envelope>

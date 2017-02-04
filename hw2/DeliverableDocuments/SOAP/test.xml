@@ -1,0 +1,11 @@
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+    <S:Header>
+        <ns2:Token>ID2208_AUTH_TOKEN</ns2:Token>
+    </S:Header
+    <S:Body>
+        <ns2:getItineraries xmlns:ns2="http://flight_reservation">
+            <arg0>Stockholm</arg0>
+            <arg1>Mumbai</arg1>
+        </ns2:getItineraries>
+    </S:Body>
+</S:Envelope>

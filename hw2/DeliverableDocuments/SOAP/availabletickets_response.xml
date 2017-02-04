@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+    <S:Body>
+        <ns2:getAvailableTicketsResponse xmlns:ns2="http://flight_reservation">
+            <return>
+                <Date>2017-02-04T01:12:39.489+01:00</Date>
+                <Flight>
+                    <DepartmentCity>Stockholm</DepartmentCity>
+                    <DestinationCity>Madrid</DestinationCity>
+                </Flight>
+                <Price>150.0</Price>
+            </return>
+            <return>
+                <Date>2017-02-04T01:12:39.489+01:00</Date>
+                <Flight>
+                    <DepartmentCity>Madrid</DepartmentCity>
+                    <DestinationCity>Mumbai</DestinationCity>
+                </Flight>
+                <Price>300.0</Price>
+            </return>
+        </ns2:getAvailableTicketsResponse>
+    </S:Body>
+</S:Envelope>

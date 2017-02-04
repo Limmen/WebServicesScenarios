@@ -52,19 +52,64 @@
 \begin{document}
 \noindent
 \large\textbf{Homework 2} \hfill \textbf{Kim Hammar} \\
-\normalsize ID2208 \hfill  \textbf{-} \\
+\normalsize ID2208 \hfill  \textbf{Mallu Goswami} \\
 Programming Web-Services \hfill Due Date: 7 February 2017\\
 
 \section*{Problem Statement}
-
+This report covers the work done in an assignment on programming WebServices. The given task was to implement flight-ticket reservation services as web services. Further more both the top-down and bottom-up approaches to developing web services should be practiced.
 \section*{Main problems and solutions}
-
-\subsection*{Designing XML Schemas}
-
+\begin{itemize}
+\item \textit{Bottom-up approach} - This task included using JAX-WS library \citep{jax_ws} in java to implement webservices by first developing java classes and interfaces and then using \texttt{wsgen} tool to generate WSDL and XML Schema files.
+\item \textit{Top-down approach} - Opposite development chain compared to bottom-up. Start by developing WSDL and XML schema files and then use the \texttt{wsimport} tool to generate Java classes and interfaces.  
+\end{itemize}
+\subsection*{Implementation}
+Webservice is implemented using JAX-WS library and Document-style SOAP communication over the default SOAP-HTTP binding.
+\begin{figure}[H]
+  \begin{center}
+    \scalebox{0.7}{
+      \includegraphics{fig.pdf}
+    }
+    \caption{WebService Implementation with JAX-WS}
+    \label{fig:fig}
+  \end{center}
+\end{figure}
+\subsection*{SOAP}
+Using headers to add functionality to SOAP messages is known as vertical extension \citep{coursebook}. Perhaps the most canonical case to use SOAP headers to extend messages and protocols is to add security, since this is a typical requirement that might not be required at first deployment but as the service matures it might become a necessity. In our implementation of the flight-ticket reservation service we use a very ad-hoc authentication/authorization solution. First of all, credentials are sent in plaintext, and second the security token is sent as an \textit{argument} to each invocation which clutters the interface and gives poor separation of concerns.
+\begin{lstlisting}[frame=single,style=base]
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+    <S:Body>
+        <ns2:getItineraries xmlns:ns2="http://flight_reservation">
+            <arg0>Stockholm</arg0>
+            <arg1>Mumbai</arg1>
+            <arg2>@ID2208_AUTH_TOKEN@</arg2>
+        </ns2:getItineraries>
+    </S:Body>
+</S:Envelope>
+\end{lstlisting}
+A better idea would be to employ a security solution utilizing SOAP intermediaries and WS-Security, however that is out of scope of this tutorial, but atleast we can achieve a better service-design by sending the security-token as part of the SOAP header instead of invocation-argument.
+\begin{lstlisting}[frame=single,style=base]
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+    <S:Header>
+        <ns2:Token>@ID2208_AUTH_TOKEN@</ns2:Token>
+    </S:Header
+    <S:Body>
+        <ns2:getItineraries xmlns:ns2="http://flight_reservation">
+            <arg0>Stockholm</arg0>
+            <arg1>Mumbai</arg1>
+        </ns2:getItineraries>
+    </S:Body>
+</S:Envelope>
+\end{lstlisting}
+There are many advantages with this approach:
+\begin{itemize}
+\item Separating the authentication from the method invocation means that we can later improve the security solution and change the API without having to change the interface of every operation.
+\item Having the authentication information in the header means that we could develop a solution where SOAP Intermedaries handles the authentication and the application don't have to be aware of it.
+\end{itemize}
 \section*{Conclusions}
-
+JAX-WS library allows you to develop web services in java without having to do much manual work with XML. However, to achieve good design for a web service you need still need a satisfactory understanding of the underlying technologies and formats. Two main approaches to developing web services nowadays when using java are top-down and bottom-up, which one to prefer depends on the situation. In general it requires more knowledge to do the top-down approach but it can also be more powerful.
 
 \section*{Attachments}
+Documented source code can be found in the attached zipfile. See README.MD in the root directory for instructions how to execute and build the program.
 
 \bibliography{references}{}
 \bibliographystyle{plain}

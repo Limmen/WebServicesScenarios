@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+    <S:Body>
+        <ns2:getPriceListResponse xmlns:ns2="http://flight_reservation">
+            <return>
+                <Itinerary>
+                    <Flights>
+                        <DepartmentCity>Stockholm</DepartmentCity>
+                        <DestinationCity>Madrid</DestinationCity>
+                    </Flights>
+                    <Flights>
+                        <DepartmentCity>Madrid</DepartmentCity>
+                        <DestinationCity>Mumbai</DestinationCity>
+                    </Flights>
+                </Itinerary>
+                <Price>450.0</Price>
+            </return>
+            <return>
+                <Itinerary>
+                    <Flights>
+                        <DepartmentCity>Stockholm</DepartmentCity>
+                        <DestinationCity>Madrid</DestinationCity>
+                    </Flights>
+                </Itinerary>
+                <Price>150.0</Price>
+            </return>
+            <return>
+                <Itinerary>
+                    <Flights>
+                        <DepartmentCity>Stockholm</DepartmentCity>
+                        <DestinationCity>Paris</DestinationCity>
+                    </Flights>
+                </Itinerary>
+                <Price>100.0</Price>
+            </return>
+            <return>
+                <Itinerary>
+                    <Flights>
+                        <DepartmentCity>Madrid</DepartmentCity>
+                        <DestinationCity>Mumbai</DestinationCity>
+                    </Flights>
+                </Itinerary>
+                <Price>300.0</Price>
+            </return>
+        </ns2:getPriceListResponse>
+    </S:Body>
+</S:Envelope>

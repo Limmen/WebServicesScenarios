@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" targetNamespace="http://flight_reservation" xmlns:tns="http://flight_reservation" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="AuthorizationException" type="tns:AuthorizationException"/>
+
+  <xs:element name="Flight" type="tns:flight"/>
+
+  <xs:element name="Itinerary" type="tns:itinerary"/>
+
+  <xs:element name="PriceEntry" type="tns:priceEntry"/>
+
+  <xs:element name="PurchasedTicket" type="tns:purchasedTicket"/>
+
+  <xs:element name="Receipt" type="tns:receipt"/>
+
+  <xs:element name="Ticket" type="tns:ticket"/>
+
+  <xs:element name="bookTickets" type="tns:bookTickets"/>
+
+  <xs:element name="bookTicketsResponse" type="tns:bookTicketsResponse"/>
+
+  <xs:element name="getAvailableTickets" type="tns:getAvailableTickets"/>
+
+  <xs:element name="getAvailableTicketsResponse" type="tns:getAvailableTicketsResponse"/>
+
+  <xs:element name="getItineraries" type="tns:getItineraries"/>
+
+  <xs:element name="getItinerariesResponse" type="tns:getItinerariesResponse"/>
+
+  <xs:element name="getPriceList" type="tns:getPriceList"/>
+
+  <xs:element name="getPriceListResponse" type="tns:getPriceListResponse"/>
+
+  <xs:element name="issueTickets" type="tns:issueTickets"/>
+
+  <xs:element name="issueTicketsResponse" type="tns:issueTicketsResponse"/>
+
+  <xs:element name="login" type="tns:login"/>
+
+  <xs:element name="loginResponse" type="tns:loginResponse"/>
+
+  <xs:complexType name="getAvailableTickets">
+    <xs:sequence>
+      <xs:element name="arg0" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="arg1" type="tns:itinerary" minOccurs="0"/>
+      <xs:element name="arg2" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="itinerary">
+    <xs:sequence>
+      <xs:element name="Flights" type="tns:flight" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="flight">
+    <xs:sequence>
+      <xs:element name="DepartmentCity" type="xs:string" minOccurs="0"/>
+      <xs:element name="DestinationCity" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getAvailableTicketsResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:ticket" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ticket">
+    <xs:sequence>
+      <xs:element name="Date" type="xs:dateTime" minOccurs="0"/>
+      <xs:element ref="tns:Flight" minOccurs="0"/>
+      <xs:element name="Price" type="xs:float"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="AuthorizationException">
+    <xs:sequence>
+      <xs:element name="message" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="bookTickets">
+    <xs:sequence>
+      <xs:element name="arg0" type="xs:int"/>
+      <xs:element name="arg1" type="tns:ticket" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="arg2" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="bookTicketsResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:receipt" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="receipt">
+    <xs:sequence>
+      <xs:element name="CreditCardNumber" type="xs:int"/>
+      <xs:element name="ReceiptId" type="xs:int"/>
+      <xs:element name="Tickets" type="tns:ticket" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getItineraries">
+    <xs:sequence>
+      <xs:element name="arg0" type="xs:string" minOccurs="0"/>
+      <xs:element name="arg1" type="xs:string" minOccurs="0"/>
+      <xs:element name="arg2" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getItinerariesResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:itinerary" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getPriceList">
+    <xs:sequence>
+      <xs:element name="arg0" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getPriceListResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:priceEntry" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="priceEntry">
+    <xs:sequence>
+      <xs:element ref="tns:Itinerary" minOccurs="0"/>
+      <xs:element name="Price" type="xs:float"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="login">
+    <xs:sequence>
+      <xs:element name="arg0" type="xs:string" minOccurs="0"/>
+      <xs:element name="arg1" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="loginResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="issueTickets">
+    <xs:sequence>
+      <xs:element name="arg0" type="tns:receipt" minOccurs="0"/>
+      <xs:element name="arg1" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="issueTicketsResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:purchasedTicket" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="purchasedTicket">
+    <xs:sequence>
+      <xs:element ref="tns:Receipt" minOccurs="0"/>
+      <xs:element ref="tns:Ticket" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+

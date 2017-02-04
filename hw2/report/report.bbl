@@ -1,0 +1,17 @@
+\begin{thebibliography}{1}
+
+\bibitem{coursebook}
+Stephen Graham, Glen Daniels, Doug Davis, Yuichi Nakamura, Simeon Simeonov,
+  Toufic Boubez, Ryo Neyama, Peter Brittenham, Paul Freemantle, and Dieter
+  Koenig.
+\newblock {\em Building Web Services with Java: Making Sense of XML, SOAP,
+  WSDL, and UDDI (2Nd Edition)}.
+\newblock Pearson Education, 2004.
+
+\bibitem{jax_ws}
+Oracle.
+\newblock Building web services with jax-ws.
+\newblock \url{http://docs.oracle.com/javaee/6/tutorial/doc/bnayl.html}, 2013.
+\newblock [Online; accessed 4-Feb-2017].
+
+\end{thebibliography}

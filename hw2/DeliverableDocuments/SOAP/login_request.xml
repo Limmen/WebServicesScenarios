@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+    <S:Body>
+        <ns2:login xmlns:ns2="http://flight_reservation">
+            <arg0>kim</arg0>
+            <arg1>id2208</arg1>
+        </ns2:login>
+    </S:Body>
+</S:Envelope>

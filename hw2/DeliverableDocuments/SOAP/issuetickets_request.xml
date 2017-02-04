@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+    <S:Body>
+        <ns2:issueTickets xmlns:ns2="http://flight_reservation">
+            <arg0>
+                <CreditCardNumber>1337</CreditCardNumber>
+                <ReceiptId>0</ReceiptId>
+                <Tickets>
+                    <Date>2017-02-04T01:15:29.499+01:00</Date>
+                    <Flight>
+                        <DepartmentCity>Stockholm</DepartmentCity>
+                        <DestinationCity>Madrid</DestinationCity>
+                    </Flight>
+                    <Price>150.0</Price>
+                </Tickets>
+                <Tickets>
+                    <Date>2017-02-04T01:15:29.505+01:00</Date>
+                    <Flight>
+                        <DepartmentCity>Madrid</DepartmentCity>
+                        <DestinationCity>Mumbai</DestinationCity>
+                    </Flight>
+                    <Price>300.0</Price>
+                </Tickets>
+            </arg0>
+            <arg1>ID2208_AUTH_TOKEN</arg1>
+        </ns2:issueTickets>
+    </S:Body>
+</S:Envelope>
