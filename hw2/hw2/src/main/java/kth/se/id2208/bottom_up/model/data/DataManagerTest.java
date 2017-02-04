@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
+ * Unit-test suite for the DataManager
+ *
  * @author Kim Hammar on 2017-02-03.
  */
 public class DataManagerTest {
@@ -23,7 +25,7 @@ public class DataManagerTest {
         ArrayList<PriceEntry> priceList = dataManager.getPriceList();
         Assert.assertEquals(4, priceList.size());
         for(PriceEntry priceEntry : priceList){
-            if(priceEntry.getInitiary().getFlights().size() == 2){
+            if(priceEntry.getItinerary().getFlights().size() == 2){
                 Assert.assertEquals(450.0f, priceEntry.getPrice(), 0.0f);
             }
         }
@@ -50,27 +52,27 @@ public class DataManagerTest {
 
     @org.junit.Test
     public void testGetAvailableTickets() throws Exception {
-        ArrayList<Ticket> availableTickets = dataManager.getAvailableTickets(dataManager.getAllInitiaries("Stockholm", "Paris").get(0), new Date());
+        ArrayList<Ticket> availableTickets = dataManager.getAvailableTickets(dataManager.getAllItineraries("Stockholm", "Paris").get(0), new Date());
         Assert.assertEquals(1, availableTickets.size());
-        availableTickets = dataManager.getAvailableTickets(dataManager.getAllInitiaries("Paris", "Madrid").get(0), new Date());
+        availableTickets = dataManager.getAvailableTickets(dataManager.getAllItineraries("Paris", "Madrid").get(0), new Date());
         Assert.assertEquals(0, availableTickets.size());
-        availableTickets = dataManager.getAvailableTickets(dataManager.getAllInitiaries("Stockholm", "Mumbai").get(0), new Date());
+        availableTickets = dataManager.getAvailableTickets(dataManager.getAllItineraries("Stockholm", "Mumbai").get(0), new Date());
         Assert.assertEquals(2, availableTickets.size());
     }
 
     @org.junit.Test
     public void testGetAllInitiaries() throws Exception {
-        ArrayList<Initiary> initiaries = dataManager.getAllInitiaries();
+        ArrayList<Itinerary> initiaries = dataManager.getAllItineraries();
         Assert.assertEquals(7, initiaries.size());
     }
 
     @org.junit.Test
     public void testGetAllInitiaries1() throws Exception {
-        ArrayList<Initiary> initiaries = dataManager.getAllInitiaries("Stockholm", "Mumbai");
+        ArrayList<Itinerary> initiaries = dataManager.getAllItineraries("Stockholm", "Mumbai");
         Assert.assertEquals(2, initiaries.size());
-        initiaries = dataManager.getAllInitiaries("Stockholm", "Madrid");
+        initiaries = dataManager.getAllItineraries("Stockholm", "Madrid");
         Assert.assertEquals(2, initiaries.size());
-        initiaries = dataManager.getAllInitiaries("Stockholm", "Paris");
+        initiaries = dataManager.getAllItineraries("Stockholm", "Paris");
         Assert.assertEquals(1, initiaries.size());
     }
 }

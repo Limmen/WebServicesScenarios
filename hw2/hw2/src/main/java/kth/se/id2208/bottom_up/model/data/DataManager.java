@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
+ *
+ * DataManager for this scenario, acts as a sample database and exposes an API for the data.
+ *
  * @author Kim Hammar on 2017-02-03.
  */
 public class DataManager {
@@ -17,42 +20,40 @@ public class DataManager {
     private ArrayList<Ticket> tickets = new ArrayList();
 
     public DataManager() {
-        Flight flight = new Flight();
-        flight.setDepartmentCity("Stockholm");
-        flight.setDestinationCity("Paris");
-        flights.add(flight);
-        flight = new Flight();
-        flight.setDepartmentCity("Stockholm");
-        flight.setDestinationCity("Madrid");
-        flights.add(flight);
-        flight = new Flight();
-        flight.setDepartmentCity("Paris");
-        flight.setDestinationCity("Madrid");
-        flights.add(flight);
-        /*
         flights.add(new Flight("Stockholm", "Paris"));
         flights.add(new Flight("Stockholm", "Madrid"));
         flights.add(new Flight("Paris", "Madrid"));
         flights.add(new Flight("Madrid", "Mumbai"));
-        */
+
         tickets.add(new Ticket(flights.get(0), 100));
-//        tickets.add(new Ticket(flights.get(1), 150));
-//        tickets.add(new Ticket(flights.get(3), 300));
+        tickets.add(new Ticket(flights.get(1), 150));
+        tickets.add(new Ticket(flights.get(3), 300));
     }
 
+    /**
+     * Returns priceList for all itineraries. Price of a itinerary is the sum of price of all flights.
+     *
+     * @return List of PriceEntrys
+     */
     public ArrayList<PriceEntry> getPriceList() {
         ArrayList<PriceEntry> priceList = new ArrayList();
-        ArrayList<Initiary> initiaries = getAllInitiaries();
-        for(Initiary initiary : initiaries){
+        ArrayList<Itinerary> initiaries = getAllItineraries();
+        for (Itinerary itinerary : initiaries) {
             try {
-                float price = initiary.getPrice(tickets);
-                priceList.add(new PriceEntry(initiary, price));
+                float price = itinerary.getPrice(tickets);
+                priceList.add(new PriceEntry(itinerary, price));
             } catch (TicketNotAvailable ticketNotAvailable) {
             }
         }
         return priceList;
     }
 
+    /**
+     * Issue tickets given a receiptId
+     *
+     * @param receipt
+     * @return List of PurchasedTickets
+     */
     public ArrayList<PurchasedTicket> issueTickets(Receipt receipt) {
         ArrayList<PurchasedTicket> issuedTickets = new ArrayList();
         for (PurchasedTicket purchasedTicket : purchasedTickets) {
@@ -65,15 +66,22 @@ public class DataManager {
     public Receipt bookTickets(int creditCardNumber, ArrayList<Ticket> tickets) {
         Receipt receipt = new Receipt(creditCardNumber, tickets);
         for (Ticket ticket : tickets) {
-            PurchasedTicket purchasedTicket = new PurchasedTicket(ticket, receipt);
+            PurchasedTicket purchasedTicket = new PurchasedTicket(receipt, ticket);
             purchasedTickets.add(purchasedTicket);
         }
         return receipt;
     }
 
-    public ArrayList<Ticket> getAvailableTickets(Initiary initiary, Date date) {
+    /**
+     * Returns all availabletickets for a given itinerary and date
+     *
+     * @param itinerary
+     * @param date
+     * @return List of tickets
+     */
+    public ArrayList<Ticket> getAvailableTickets(Itinerary itinerary, Date date) {
         ArrayList<Ticket> availableTickets = new ArrayList();
-        for (Flight flight : initiary.getFlights()) {
+        for (Flight flight : itinerary.getFlights()) {
             for (Ticket ticket : tickets) {
                 if (ticket.getFlight().equals(flight))
                     availableTickets.add(ticket);
@@ -82,41 +90,62 @@ public class DataManager {
         return availableTickets;
     }
 
-    public ArrayList<Initiary> getAllInitiaries() {
-        ArrayList<Initiary> initiaries = new ArrayList();
-        initiaries.addAll(getAllInitiaries("Stockholm", "Mumbai"));
-        initiaries.addAll(getAllInitiaries("Stockholm", "Madrid"));
-        initiaries.addAll(getAllInitiaries("Stockholm", "Paris"));
-        initiaries.addAll(getAllInitiaries("Paris", "Madrid"));
-        initiaries.addAll(getAllInitiaries("Madrid", "Mumbai"));
+    /**
+     * Gets all itineraries
+     *
+     * @return List of itineraries
+     */
+    public ArrayList<Itinerary> getAllItineraries() {
+        ArrayList<Itinerary> initiaries = new ArrayList();
+        initiaries.addAll(getAllItineraries("Stockholm", "Mumbai"));
+        initiaries.addAll(getAllItineraries("Stockholm", "Madrid"));
+        initiaries.addAll(getAllItineraries("Stockholm", "Paris"));
+        initiaries.addAll(getAllItineraries("Paris", "Madrid"));
+        initiaries.addAll(getAllItineraries("Madrid", "Mumbai"));
         return initiaries;
     }
 
-    public ArrayList<Initiary> getAllInitiaries(String departmentCity, String destinationCity) {
+    /**
+     * Gets all itineraries given a departmentCity and destinationCity
+     *
+     * @param departmentCity
+     * @param destinationCity
+     * @return List of itinerary
+     */
+    public ArrayList<Itinerary> getAllItineraries(String departmentCity, String destinationCity) {
         boolean done = false;
-        ArrayList<Initiary> initiaries = new ArrayList<Initiary>();
+        ArrayList<Itinerary> initiaries = new ArrayList<Itinerary>();
         while (!done) {
-            Initiary initiary = getInitiary(departmentCity, destinationCity, new Initiary(), initiaries);
-            if (initiary == null)
+            Itinerary itinerary = getItinerary(departmentCity, destinationCity, new Itinerary(), initiaries);
+            if (itinerary == null)
                 done = true;
             else
-                initiaries.add(initiary);
+                initiaries.add(itinerary);
         }
         return initiaries;
     }
 
-    private Initiary getInitiary(String currentLocation, String destinationCity, Initiary initiary, ArrayList<Initiary> initiaries) {
+    /**
+     * Recusive method that generates a new itinerary if there is one that is not already in the list of itineraries
+     *
+     * @param currentLocation
+     * @param destinationCity
+     * @param itinerary
+     * @param initiaries
+     * @return new Itinerary
+     */
+    private Itinerary getItinerary(String currentLocation, String destinationCity, Itinerary itinerary, ArrayList<Itinerary> initiaries) {
         if (currentLocation.equalsIgnoreCase(destinationCity))
-            return initiary;
+            return itinerary;
         else {
             for (Flight flight : flights)
                 if (flight.getDepartmentCity().equalsIgnoreCase(currentLocation)) {
-                    Initiary arg = new Initiary();
-                    for(Flight fl : initiary.getFlights()){
+                    Itinerary arg = new Itinerary();
+                    for (Flight fl : itinerary.getFlights()) {
                         arg.addFlight(fl);
                     }
                     arg.addFlight(flight);
-                    Initiary result = getInitiary(flight.getDestinationCity(), destinationCity, arg, initiaries);
+                    Itinerary result = getItinerary(flight.getDestinationCity(), destinationCity, arg, initiaries);
                     if (result != null && !initiaries.contains(result))
                         return result;
                 }
