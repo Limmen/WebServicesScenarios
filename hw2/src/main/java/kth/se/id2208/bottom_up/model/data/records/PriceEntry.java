@@ -10,8 +10,9 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement(name="PriceEntry")
 public class PriceEntry {
-
+    @XmlElement(name = "Itinerary")
     private Itinerary itinerary;
+    @XmlElement(name = "Price")
     private float price;
 
     public PriceEntry(Itinerary itinerary, float price) {

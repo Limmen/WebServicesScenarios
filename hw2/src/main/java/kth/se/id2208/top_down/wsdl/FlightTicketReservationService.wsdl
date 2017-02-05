@@ -125,6 +125,7 @@
     <!-- Declares a collection of concrete endpoints in the service and their deployment information which is
     represented in the "port" element. -->
     <service name="FlightTicketReservationService">
+        <documentation> WSDL description for FlightTicketReservationService, generated in top-down fashion </documentation>
         <port name="FlightTicketReservationService" binding="tns:FlightTicketReservationServiceBinding">
             <soap:address location="http://localhost:9001/kth.se.id2208.top_down.FlightTicketReservationService"/>
         </port>

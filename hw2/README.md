@@ -12,14 +12,14 @@
 
 ### Task a) - Implement the services 
 
-- **top-down**: `./src/kth/se/id2208/hw2/top_down`
-- **bottom-up**: `./src/kth/se/id2208/hw2/top_down`
+- **top-down**: `./src/kth/se/id2208/top_down`
+- **bottom-up**: `./src/kth/se/id2208/bottom_up`
 
 For documents related to implemented services see deliverables.
 
 ### Task b) Test client
 
-- **client**: `./src/kth/se/id2208/hw2/client`
+- **client**: `./src/kth/se/id2208/client`
 
 ### Task c) extended SOAP messages, see report
 
@@ -44,4 +44,5 @@ There is three main-files that can be run, one inside `bottom_up` package, one i
 ## Author
  
 Kim Hammar  <kimham@kth.se>
+
 Mallu Goswami
