@@ -69,7 +69,7 @@
 \begin{document}
 \noindent
 \large\textbf{Homework 2} \hfill \textbf{Kim Hammar} \\
-\normalsize ID2208 \hfill  \textbf{Mallu Goswami} \\
+\normalsize ID2208 \hfill  \textbf{Mallu} \\
 Programming Web-Services \hfill Due Date: 7 February 2017\\
 
 \section*{Problem Statement}
@@ -90,19 +90,12 @@ public class PriceEntry {
     @XmlElement(name = "Price")
     private float price;
   \end{lstlisting}
-\subsection*{Implementation}
-Both the bottom-up and top-down implementation results in the same result, a webservice that uses JAX-WS library and Document-style SOAP communication over the default SOAP-HTTP binding.
-\begin{figure}[H]
-  \begin{center}
-    \scalebox{0.7}{
-      \includegraphics{fig.pdf}
-    }
-    \caption{WebService Implementation with JAX-WS}
-    \label{fig:fig}
-  \end{center}
-\end{figure}
 
-\subsection*{Automatic generation with wsgen and wsimport}
+\subsection*{Top-down}
+We have implemented booking and issuing of tickets services as top down web services, for top down web service the first step is to generate a wsdl file first which completely describes the web service to be implemented, and then we generate java from this wsdl file using \texttt{wsimport} command. For this task, we have created \texttt{FlightReservationServiceTopDown.wsdl} as core step and then generated further java files. This task also included defining the XML types in XML schema.
+
+
+\subsubsection*{Our experience from automatic generation with wsgen and wsimport}
 The whole idea of top-down vs bottom-up approach to webservices development exists because there is a good match between XML structures and in particular object-oriented languages like java. Access to tools like \texttt{wsgen} and \texttt{wsimport} means that it is possible to automate generation of java-files from WSDL/XML and vice-versa.
 
 In this assignment we applied both directions and it works well but we discovered that the generation highly depends on what structure you use in your wsdl-file and your java-file. For instance how you define your types in XML schema, using anonymous complex-types inside element definitions results in java files looking something like this:
@@ -116,7 +109,21 @@ In this assignment we applied both directions and it works well but we discovere
     public static class Flights {}
   }    
 \end{lstlisting}
-In essence the generation tool creates static inner classes for local elements in XML Schemas and stand-alone java classes for global elements. This ofcourse is not a problem, and it will result in the same SOAP-messages on the wire, but it had the consequence that we could'nt use the same client for the bottom-up implementation as the top-down implementation as for example the generated \texttt{ItineraryType.Flight} in the top-down implementation cannot be interchanged with the \texttt{Flight} class used in bottom-up implementation and thus the java-client needs to know which class to parse into. 
+In essence the generation tool creates static inner classes for local elements in XML Schemas and stand-alone java classes for global elements. This ofcourse is not a problem, and it will result in the same SOAP-messages on the wire, 
+but it had the consequence that we could'nt use the same client for the bottom-up implementation as the top-down implementation as for example the generated \texttt{ItineraryType.Flight} in the top-down implementation cannot be interchanged with the \texttt{Flight} class used in bottom-up implementation and thus the java-client needs to know which class to parse into. 
+
+
+\subsection*{Implementation}
+Both the bottom-up and top-down implementation results in the same result, a webservice that uses JAX-WS library and Document-style SOAP communication over the default SOAP-HTTP binding.
+\begin{figure}[H]
+  \begin{center}
+    \scalebox{0.7}{
+      \includegraphics{fig.pdf}
+    }
+    \caption{WebService Implementation with JAX-WS}
+    \label{fig:fig}
+  \end{center}
+\end{figure}
 
 \subsection*{SOAP}
 Using headers to add functionality to SOAP messages is known as vertical extension \citep{coursebook}. Perhaps the most canonical case to use SOAP headers to extend messages and protocols is to add security, since this is a typical requirement that might not be required at first deployment but as the service matures it might become a necessity. In our implementation of the flight-ticket reservation service we use a very ad-hoc authentication/authorization solution. First of all, credentials are sent in plaintext, and second, the security token is sent as an \textit{argument} to each invocation which clutters the interface and gives poor separation of concerns.
