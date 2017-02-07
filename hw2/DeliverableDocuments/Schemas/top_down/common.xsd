@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xsd:schema
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns="http://id2208.se.kth.top_down.FlightTicketReservationService"
+        targetNamespace="http://id2208.se.kth.top_down.FlightTicketReservationService"
+>
+    <xsd:annotation>
+        <xsd:documentation xml:lang="en">
+            This schema defines common types
+        </xsd:documentation>
+    </xsd:annotation>
+
+    <!-- Fault as a result of application throwing AuthorizationException when secrutiy token is invalid -->
+    <xsd:element name="AuthorizationException">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="Message" type="xsd:string" minOccurs="0"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+</xsd:schema>

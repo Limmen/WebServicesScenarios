@@ -92,8 +92,7 @@ public class PriceEntry {
   \end{lstlisting}
 
 \subsection*{Top-down}
-We have implemented booking and issuing of tickets services as top down web services, for top down web service the first step is to generate a wsdl file first which completely describes the web service to be implemented, and then we generate java from this wsdl file using \texttt{wsimport} command. For this task, we have created \texttt{FlightReservationServiceTopDown.wsdl} as core step and then generated further java files. This task also included defining the XML types in XML schema.
-
+We have implemented booking and issuing of tickets services as top down web services, for top down web service the first step is to generate a wsdl file first which completely describes the web service to be implemented, and then we generate java from this wsdl file using \texttt{wsimport} command. For this task, we have created \texttt{FlightReservationServiceTopDown.wsdl} as core step and then generated further java files. This task also included defining the XML types in XML schema. We found that designing a WSDL file was very simple and efficient way to build java-webservices however we encountered some special effects we did'nt know in advance which is presented in the following section.
 
 \subsubsection*{Our experience from automatic generation with wsgen and wsimport}
 The whole idea of top-down vs bottom-up approach to webservices development exists because there is a good match between XML structures and in particular object-oriented languages like java. Access to tools like \texttt{wsgen} and \texttt{wsimport} means that it is possible to automate generation of java-files from WSDL/XML and vice-versa.

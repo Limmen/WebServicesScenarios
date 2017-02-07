@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns="http://id2208.se.kth.top_down.FlightTicketReservationService"
+            targetNamespace="http://id2208.se.kth.top_down.FlightTicketReservationService"
+>
+
+    <xsd:annotation>
+        <xsd:documentation xml:lang="en">
+            This schema defines operations and types used for GetItineraries method of the FlightTicketReservationService
+        </xsd:documentation>
+    </xsd:annotation>
+
+    <!-- GetItineraries webmethod invocation -->
+    <xsd:element name="GetItineraries">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="DepartmentCity" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="DestinationCity" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="SecretToken" type="xsd:string" minOccurs="0"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <!-- GetItineraries webmethod response -->
+    <xsd:element name="GetItinerariesResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="return" type="ItineraryType" minOccurs="1" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <!-- A itinierary, made global since it is reused in other schemas -->
+    <xsd:complexType name="ItineraryType">
+        <xsd:sequence>
+            <xsd:element name="Flights" minOccurs="0" maxOccurs="unbounded">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="DepartmentCity" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="DestinationCity" type="xsd:string" minOccurs="0"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>
