@@ -5,7 +5,6 @@ import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.api.json.JSONConfiguration;
-import kth.se.id2208.hw3.server.model.HelloWorldPOJO;
 
 import javax.ws.rs.core.MediaType;
 
@@ -25,15 +24,16 @@ public class HelloWorldClient {
         /**
          * Create webresource to the server to be able to make requests
          */
-        WebResource webResource = client.resource("http://localhost:8080/hw3/rest/hello");
+        WebResource webResource = client.resource("http://localhost:8080/rest");
         /**
          * Get requests to server
          */
+        /*
         String response = webResource.accept(MediaType.TEXT_PLAIN).get(String.class);
         System.out.println("Received: " + response);
         response = webResource.accept(MediaType.APPLICATION_JSON).get(String.class);
         System.out.println("Received: " + response);
-        response = webResource.path("/helloNested").accept(MediaType.TEXT_PLAIN).get(String.class);
+        response = webResource.path("/hello/helloNested").accept(MediaType.TEXT_PLAIN).get(String.class);
         System.out.println("Received: " + response);
         HelloWorldPOJO helloWorldPOJO = webResource.accept(MediaType.APPLICATION_JSON).get(HelloWorldPOJO.class);
         System.out.println(helloWorldPOJO.getGreeting());
@@ -41,5 +41,10 @@ public class HelloWorldClient {
         System.out.println("Received: " + response);
         helloWorldPOJO = webResource.accept(MediaType.APPLICATION_XML).get(HelloWorldPOJO.class);
         System.out.println("Received: " + helloWorldPOJO.getGreeting());
+        */
+        String response = webResource.path("/itineraries").accept(MediaType.APPLICATION_XML).get(String.class);
+        System.out.println(response);
+        response = webResource.path("/itineraries").accept(MediaType.APPLICATION_JSON).get(String.class);
+        System.out.println(response);
     }
 }
