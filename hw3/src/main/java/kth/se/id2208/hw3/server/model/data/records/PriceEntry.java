@@ -1,4 +1,4 @@
-package kth.se.id2208.hw3.model.data.records;
+package kth.se.id2208.hw3.server.model.data.records;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;

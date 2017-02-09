@@ -1,14 +1,13 @@
-package kth.se.id2208.hw3.model.data;
+package kth.se.id2208.hw3.server.model.data;
 
 
-import kth.se.id2208.hw3.model.data.records.*;
-import kth.se.id2208.hw3.model.faults.TicketNotAvailable;
+import kth.se.id2208.hw3.server.model.data.records.*;
+import kth.se.id2208.hw3.server.model.faults.TicketNotAvailable;
 
 import java.util.ArrayList;
 import java.util.Date;
 
 /**
- *
  * DataManager for this scenario, acts as a sample database and exposes an API for the data.
  *
  * @author Kim Hammar on 2017-02-03.
@@ -21,7 +20,7 @@ public class DataManager {
     private ArrayList<Ticket> tickets = new ArrayList();
     private static DataManager instance = null;
 
-    private DataManager(){
+    private DataManager() {
         flights.add(new Flight("Stockholm", "Paris"));
         flights.add(new Flight("Stockholm", "Madrid"));
         flights.add(new Flight("Paris", "Madrid"));
@@ -32,9 +31,13 @@ public class DataManager {
         tickets.add(new Ticket(flights.get(3), 300));
     }
 
-
-    public static DataManager getInstance(){
-        if(instance == null)
+    /**
+     * Returns singleton instance
+     *
+     * @return
+     */
+    public static DataManager getInstance() {
+        if (instance == null)
             instance = new DataManager();
         return instance;
     }

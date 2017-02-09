@@ -1,6 +1,6 @@
-package kth.se.id2208.hw3.model.data.records;
+package kth.se.id2208.hw3.server.model.data.records;
 
-import kth.se.id2208.hw3.model.faults.TicketNotAvailable;
+import kth.se.id2208.hw3.server.model.faults.TicketNotAvailable;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;

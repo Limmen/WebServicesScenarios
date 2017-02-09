@@ -1,4 +1,4 @@
-package kth.se.id2208.hw3.model.faults;
+package kth.se.id2208.hw3.server.model.faults;
 
 /**
  * @author Kim Hammar on 2017-02-03.

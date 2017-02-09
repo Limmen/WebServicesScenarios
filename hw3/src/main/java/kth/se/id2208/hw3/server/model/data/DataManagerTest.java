@@ -1,5 +1,5 @@
-package kth.se.id2208.hw3.model.data;
-import kth.se.id2208.hw3.model.data.records.*;
+package kth.se.id2208.hw3.server.model.data;
+import kth.se.id2208.hw3.server.model.data.records.*;
 import org.junit.Assert;
 
 import java.util.ArrayList;

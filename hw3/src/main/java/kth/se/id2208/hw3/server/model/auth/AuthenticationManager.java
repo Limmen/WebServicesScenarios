@@ -1,6 +1,6 @@
-package kth.se.id2208.hw3.model.auth;
+package kth.se.id2208.hw3.server.model.auth;
 
-import kth.se.id2208.hw3.model.faults.AuthorizationException;
+import kth.se.id2208.hw3.server.model.faults.AuthorizationException;
 
 /**
  * AuthenticationManager handles login and authorization
@@ -10,6 +10,20 @@ import kth.se.id2208.hw3.model.faults.AuthorizationException;
 public class AuthenticationManager {
 
     private static String SECRET_TOKEN = "ID2208_AUTH_TOKEN";
+    private static AuthenticationManager instance = null;
+
+    private AuthenticationManager(){}
+
+    /**
+     * Returns singleton instance
+     *
+     * @return
+     */
+    public static AuthenticationManager getInstance(){
+        if(instance == null)
+            instance = new AuthenticationManager();
+        return instance;
+    }
 
     /**
      * Login operaiton, validates username and passwords and returns token if correct
