@@ -50,6 +50,8 @@ public class AuthenticationManager {
      * @throws AuthorizationException thrown if token was invalid.
      */
     public boolean authorize(String token) throws AuthorizationException{
+        if(token == null)
+            throw new AuthorizationException("Invalid token");
         if(token.equals(SECRET_TOKEN))
             return true;
         else throw new AuthorizationException("Invalid token");

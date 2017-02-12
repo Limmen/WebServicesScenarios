@@ -43,6 +43,84 @@ public class DataManager {
     }
 
     /**
+     * Put Flights
+     *
+     * @param flights
+     * @return
+     */
+    public ArrayList<Flight> putFlights(ArrayList<Flight> flights){
+        this.flights = flights;
+        return this.flights;
+    }
+
+    /**
+     * Deletes flights
+     */
+    public void deleteFlights(){
+        flights.removeAll(flights);
+    }
+
+    /**
+     * Put flight
+     *
+     * @param flight
+     * @param index
+     * @return
+     */
+    public Flight putFlight(Flight flight, int index){
+        flights.set(index, flight);
+        return flights.get(index);
+    }
+
+    /**
+     * Delete flight
+     *
+     * @param index
+     */
+    public void deleteFlight(int index){
+        flights.remove(index);
+    }
+
+    /**
+     * Put Tickets
+     *
+     * @param tickets
+     * @return
+     */
+    public ArrayList<Ticket> putTickets(ArrayList<Ticket> tickets){
+        this.tickets = tickets;
+        return this.tickets;
+    }
+
+    /**
+     * Deletes tickets
+     */
+    public void deleteTickets(){
+        tickets.removeAll(tickets);
+    }
+
+    /**
+     * Put ticket
+     *
+     * @param ticket
+     * @param index
+     * @return
+     */
+    public Ticket putTicket(Ticket ticket, int index){
+        tickets.set(index, ticket);
+        return tickets.get(index);
+    }
+
+    /**
+     * Delete ticket
+     *
+     * @param index
+     */
+    public void deleteTicket(int index){
+        tickets.remove(index);
+    }
+
+    /**
      * Returns priceList for all itineraries. Price of a itinerary is the sum of price of all flights.
      *
      * @return List of PriceEntrys
@@ -63,21 +141,25 @@ public class DataManager {
     /**
      * Issue tickets given a receiptId
      *
-     * @param receipt
+     * @param receiptId
      * @return List of PurchasedTickets
      */
-    public ArrayList<PurchasedTicket> issueTickets(Receipt receipt) {
+    public ArrayList<PurchasedTicket> issueTickets(int receiptId) {
         ArrayList<PurchasedTicket> issuedTickets = new ArrayList();
         for (PurchasedTicket purchasedTicket : purchasedTickets) {
-            if (purchasedTicket.getReceipt().getReceiptId() == receipt.getReceiptId())
+            if (purchasedTicket.getReceipt().getReceiptId() == receiptId)
                 issuedTickets.add(purchasedTicket);
         }
         return issuedTickets;
     }
 
-    public Receipt bookTickets(int creditCardNumber, ArrayList<Ticket> tickets) {
+    public Receipt bookTickets(int creditCardNumber, ArrayList<Ticket> tickets) throws TicketNotAvailable {
         Receipt receipt = new Receipt(creditCardNumber, tickets);
+        if(tickets.size() < 1)
+            throw new TicketNotAvailable("Cannot book zero tickets");
         for (Ticket ticket : tickets) {
+            if(!tickets.contains(ticket))
+                throw new TicketNotAvailable("Ticket not available");
             PurchasedTicket purchasedTicket = new PurchasedTicket(receipt, ticket);
             purchasedTickets.add(purchasedTicket);
         }

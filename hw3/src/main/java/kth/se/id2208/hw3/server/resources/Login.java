@@ -18,12 +18,16 @@ public class Login {
 
     private AuthenticationManager authenticationManager = AuthenticationManager.getInstance();
 
+    /**
+     * Login that returns security token
+     *
+     * @param loginRequest - contains password and username
+     * @return
+     */
     @POST
-    @Path("/")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public String login(LoginRequest loginRequest) {
-        System.out.println(loginRequest.getPassword() + " "+ loginRequest.getUsername());
         try {
             String token = authenticationManager.login(loginRequest.getUsername(), loginRequest.getPassword());
             return token;

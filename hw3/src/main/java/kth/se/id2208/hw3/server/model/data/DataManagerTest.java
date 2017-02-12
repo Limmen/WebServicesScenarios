@@ -34,7 +34,7 @@ public class DataManagerTest {
     @org.junit.Test
     public void testIssueTickets() throws Exception {
         Receipt receipt = dataManager.bookTickets(1337, dataManager.getTickets());
-        ArrayList<PurchasedTicket> issuedTickets = dataManager.issueTickets(receipt);
+        ArrayList<PurchasedTicket> issuedTickets = dataManager.issueTickets(receipt.getReceiptId());
         Assert.assertEquals(issuedTickets.size(), dataManager.getTickets().size());
         for (PurchasedTicket purchasedTicket : issuedTickets) {
             Assert.assertEquals(purchasedTicket.getReceipt(), receipt);
