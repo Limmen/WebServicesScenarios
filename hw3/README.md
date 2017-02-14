@@ -27,48 +27,103 @@ Execute the following in the root directory to only recompile the program
 
 ### Run
 
-Deploy war file to any application server and specify port+base uri. You can then access the server through the following sample URI's.
+Deploy war file to any application server and specify port+base uri. 
+
+If you dont want to inspect resources manually, use ServiceClientTest which is a test-suite that tests every resource and edge-cases.
+
+#### Resources
+
+You can access the server through the following  URI's.
+
 Format of response depends on the request HTTP-accept header. Both JSON and XML supported for all resources
 
-- `curl -H "Content-Type: application/json" -X POST -d '{"username":"kim","password":"id2208"}' http://localhost:8080/rest/login` - Login with POST request
+#### Login
 
-- `http://localhost:8080/rest/itineraries?token=ID2208_AUTH_TOKEN` : Returns list of all itineraries
+Login with POST request to get super secret token
 
-- `http://localhost:8080/rest/itineraries/index?token=ID2208_AUTH_TOKEN` : Returns itinerary with index 
+`curl -H "Content-Type: application/json" -X POST -d '{"username":"kim","password":"id2208"}' http://localhost:8080/rest/login`
 
-- `http://localhost:8080/rest/itineraries?departmentCity=Stockholm&destinationCity=Mumbai&token=ID2208_AUTH_TOKEN` - Returns list of itineraries from Stockholm to Mumbai
+#### Itineraries
 
-- `http://localhost:8080/rest/pricelist?token=ID2208_AUTH_TOKEN` - Returns pricelist
+GET list of all itineraries
 
-- `http://localhost:8080/rest/flights?token=ID2208_AUTH_TOKEN` - Returns list of all flights
+`http://localhost:8080/rest/itineraries?token=ID2208_AUTH_TOKEN` 
 
-- `http://localhost:8080/rest/flights/index?token=ID2208_AUTH_TOKEN` - Returns flight with index
+GET itinerary with index
 
-- `curl -H 'Content-Type: application/json' -X PUT -d '{"flights":[{"DepartmentCity":"Stockholm","DestinationCity":"Paris"}]}' 'http://localhost:8080/rest/flights?token=ID2208_AUTH_TOKEN'` - Puts list of flights
+`http://localhost:8080/rest/itineraries/index?token=ID2208_AUTH_TOKEN` 
 
-- `curl -H 'Content-Type: application/json' -X PUT -d '{"flight":{"DepartmentCity":"Stockholm","DestinationCity":"Paris"}}' 'http://localhost:8080/rest/flights/1?token=ID2208_AUTH_TOKEN` - Put flight
+GET list of itineraries from Stockholm to Mumbai
 
-- `curl -H 'Content-Type: application/json' -X DELETE 'http://localhost:8080/rest/flights?token=ID2208_AUTH_TOKEN'` - Delete /flights resource
+`http://localhost:8080/rest/itineraries?departmentCity=Stockholm&destinationCity=Mumbai&token=ID2208_AUTH_TOKEN`
 
-- `curl -H 'Content-Type: application/json' -X DELETE 'http://localhost:8080/rest/flights/1?token=ID2208_AUTH_TOKEN'` - Delete /flights/1 resource
+#### Pricelist
 
-- `http://localhost:8080/rest/tickets?token=ID2208_AUTH_TOKEN` - Returns list of all tickets
+GET pricelist
 
-- `http://localhost:8080/rest/tickets/1?token=ID2208_AUTH_TOKEN` - Returns ticket with index
+`http://localhost:8080/rest/pricelist?token=ID2208_AUTH_TOKEN`
 
-- `curl -H 'Content-Type: application/json' -X PUT -d '{"tickets":[{"Flight":{"DepartmentCity":"Stockholm","DestinationCity":"Paris"}, "Price":"10", "Date":"2013-03-11T01:38:18.309+0000" }]}' 'http://localhost:8080/rest/tickets?token=ID2208_AUTH_TOKEN'` - Puts list of tickets
+#### Flights
 
-- `curl -H 'Content-Type: application/json' -X PUT -d '{"ticket":{"Flight":{"DepartmentCity":"Stockholm","DestinationCity":"Paris"}, "Price":"10", "Date":"2013-03-11T01:38:18.309+0000" }}' 'http://localhost:8080/rest/tickets/0?token=ID2208_AUTH_TOKEN'` - Put ticket
+GET list of all flights
 
-- `curl -H 'Content-Type: application/json' -X DELETE 'http://localhost:8080/rest/tickets?token=ID2208_AUTH_TOKEN'` - Delete /tickets resource
+`http://localhost:8080/rest/flights?token=ID2208_AUTH_TOKEN`
 
-- `curl -H 'Content-Type: application/json' -X DELETE 'http://localhost:8080/rest/tickets/1?token=ID2208_AUTH_TOKEN'` - Delete /tickets/1 resource
+GET flight with index
+`http://localhost:8080/rest/flights/index?token=ID2208_AUTH_TOKEN`
 
-- `curl -H "Content-Type: application/json" -X POST -d '{"creditCardNumber": "1337", "tickets":[{"Flight":{"DepartmentCity":"Stockholm","DestinationCity":"Paris"},"Price":100.0,"Date":1486906930985}]}' 'http://localhost:8080/rest/bookticket?token=ID2208_AUTH_TOKEN'` - Book ticket with POST request
+PUT list of flights
 
-- `http://localhost:8080/rest/purchasedtickets?receiptId=1&token=ID2208_AUTH_TOKEN` - List of purchased tickets with receiptId 1
+`curl -H 'Content-Type: application/json' -X PUT -d '{"flights":[{"DepartmentCity":"Stockholm","DestinationCity":"Paris"}]}' 'http://localhost:8080/rest/flights?token=ID2208_AUTH_TOKEN'` 
 
-or simply run the test-client which is a regular JUnit test.
+PUT flight with index
+
+`curl -H 'Content-Type: application/json' -X PUT -d '{"flight":{"DepartmentCity":"Stockholm","DestinationCity":"Paris"}}' 'http://localhost:8080/rest/flights/1?token=ID2208_AUTH_TOKEN`
+
+DELETE /flights resource
+
+`curl -H 'Content-Type: application/json' -X DELETE 'http://localhost:8080/rest/flights?token=ID2208_AUTH_TOKEN'` 
+
+DELETE /flights/1 resource
+
+`curl -H 'Content-Type: application/json' -X DELETE 'http://localhost:8080/rest/flights/1?token=ID2208_AUTH_TOKEN'`
+
+#### Tickets
+
+GET list of all tickets
+
+`http://localhost:8080/rest/tickets?token=ID2208_AUTH_TOKEN`
+
+GET ticket with index
+
+`http://localhost:8080/rest/tickets/1?token=ID2208_AUTH_TOKEN`
+
+PUT list of tickets
+
+`curl -H 'Content-Type: application/json' -X PUT -d '{"tickets":[{"Flight":{"DepartmentCity":"Stockholm","DestinationCity":"Paris"}, "Price":"10", "Date":"2013-03-11T01:38:18.309+0000" }]}' 'http://localhost:8080/rest/tickets?token=ID2208_AUTH_TOKEN'`
+
+PUT ticket with index
+
+`curl -H 'Content-Type: application/json' -X PUT -d '{"ticket":{"Flight":{"DepartmentCity":"Stockholm","DestinationCity":"Paris"}, "Price":"10", "Date":"2013-03-11T01:38:18.309+0000" }}' 'http://localhost:8080/rest/tickets/0?token=ID2208_AUTH_TOKEN'`
+
+DELETE /tickets resource
+
+`curl -H 'Content-Type: application/json' -X DELETE 'http://localhost:8080/rest/tickets?token=ID2208_AUTH_TOKEN'`
+
+DELETE /tickets/1 resource
+`curl -H 'Content-Type: application/json' -X DELETE 'http://localhost:8080/rest/tickets/1?token=ID2208_AUTH_TOKEN'`
+
+#### Book Tickets
+
+Book list of tickets with given creditcardnumber, receipt is returned.
+
+`curl -H "Content-Type: application/json" -X POST -d '{"creditCardNumber": "1337", "tickets":[{"Flight":{"DepartmentCity":"Stockholm","DestinationCity":"Paris"},"Price":100.0,"Date":1486906930985}]}' 'http://localhost:8080/rest/bookticket?token=ID2208_AUTH_TOKEN'`
+
+#### Purchased tickets
+
+GET list of purchased tickets with receiptId 1
+
+`http://localhost:8080/rest/purchasedtickets?receiptId=1&token=ID2208_AUTH_TOKEN` 
   
 ## Author
  

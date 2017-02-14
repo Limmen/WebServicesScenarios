@@ -259,7 +259,6 @@ public class ServiceClientTest {
         Itinerary itinerary = webResource.path("/itineraries/1").queryParam("token", SECRET_TOKEN).accept(MediaType.APPLICATION_JSON).get(Itinerary.class);
         SearchTicketRequest searchTicketRequest = new SearchTicketRequest(itinerary, new Date());
         ArrayList<Ticket> availableTickets = (ArrayList) webResource.path("/tickets").queryParam("token", SECRET_TOKEN).accept(MediaType.APPLICATION_XML).type(MediaType.APPLICATION_JSON).post(new GenericType<List<Ticket>>() {}, searchTicketRequest);
-        System.out.println(availableTickets.size());
         Assert.assertEquals(2, availableTickets.size());
 
 
