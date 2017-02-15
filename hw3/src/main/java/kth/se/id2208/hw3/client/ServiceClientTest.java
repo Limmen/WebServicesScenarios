@@ -1,9 +1,6 @@
 package kth.se.id2208.hw3.client;
 
-import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.GenericType;
-import com.sun.jersey.api.client.UniformInterfaceException;
-import com.sun.jersey.api.client.WebResource;
+import com.sun.jersey.api.client.*;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.api.json.JSONConfiguration;
@@ -50,6 +47,9 @@ public class ServiceClientTest {
         /**
          * Test plain /itineraries GET request, test JSON, XML, and test unmarshall into java object
          */
+
+        ClientResponse clientResponse = webResource.path("/itineraries").queryParam("token", SECRET_TOKEN).accept(MediaType.APPLICATION_XML).get(ClientResponse.class);
+        Assert.assertEquals(200, clientResponse.getStatus());
         String response = webResource.path("/itineraries").queryParam("token", SECRET_TOKEN).accept(MediaType.APPLICATION_XML).get(String.class);
         Assert.assertEquals("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><itineraries><Itinerary><Flights><DepartmentCity>Stockholm</DepartmentCity><DestinationCity>Paris</DestinationCity></Flights><Flights><DepartmentCity>Paris</DepartmentCity><DestinationCity>Madrid</DestinationCity></Flights><Flights><DepartmentCity>Madrid</DepartmentCity><DestinationCity>Mumbai</DestinationCity></Flights></Itinerary><Itinerary><Flights><DepartmentCity>Stockholm</DepartmentCity><DestinationCity>Madrid</DestinationCity></Flights><Flights><DepartmentCity>Madrid</DepartmentCity><DestinationCity>Mumbai</DestinationCity></Flights></Itinerary><Itinerary><Flights><DepartmentCity>Stockholm</DepartmentCity><DestinationCity>Paris</DestinationCity></Flights><Flights><DepartmentCity>Paris</DepartmentCity><DestinationCity>Madrid</DestinationCity></Flights></Itinerary><Itinerary><Flights><DepartmentCity>Stockholm</DepartmentCity><DestinationCity>Madrid</DestinationCity></Flights></Itinerary><Itinerary><Flights><DepartmentCity>Stockholm</DepartmentCity><DestinationCity>Paris</DestinationCity></Flights></Itinerary><Itinerary><Flights><DepartmentCity>Paris</DepartmentCity><DestinationCity>Madrid</DestinationCity></Flights></Itinerary><Itinerary><Flights><DepartmentCity>Madrid</DepartmentCity><DestinationCity>Mumbai</DestinationCity></Flights></Itinerary></itineraries>", response);
         response = webResource.path("/itineraries").queryParam("token", SECRET_TOKEN).accept(MediaType.APPLICATION_JSON).get(String.class);
@@ -60,6 +60,8 @@ public class ServiceClientTest {
         /**
          * Test /itineraries/index GET request
          */
+        clientResponse = webResource.path("/itineraries/3").queryParam("token", SECRET_TOKEN).accept(MediaType.APPLICATION_JSON).get(ClientResponse.class);
+        Assert.assertEquals(200, clientResponse.getStatus());
         Itinerary itinerary = webResource.path("/itineraries/1").queryParam("token", SECRET_TOKEN).accept(MediaType.APPLICATION_JSON).get(Itinerary.class);
         Assert.assertEquals(2, itinerary.getFlights().size());
         itinerary = webResource.path("/itineraries/2").queryParam("token", SECRET_TOKEN).accept(MediaType.APPLICATION_XML).get(Itinerary.class);
@@ -70,6 +72,13 @@ public class ServiceClientTest {
         /**
          * Test /itineraries GET request with query params for filtering
          */
+        clientResponse = webResource.path("/itineraries")
+                .queryParam("token", SECRET_TOKEN)
+                .queryParam("departmentCity", "Stockholm")
+                .queryParam("destinationCity", "Mumbai")
+                .accept(MediaType.APPLICATION_XML)
+                .get(ClientResponse.class);
+        Assert.assertEquals(200, clientResponse.getStatus());
         itineraries = (ArrayList) webResource.path("/itineraries")
                 .queryParam("token", SECRET_TOKEN)
                 .queryParam("departmentCity", "Stockholm")
@@ -117,6 +126,8 @@ public class ServiceClientTest {
          * Success login POST request test
          */
         LoginRequest loginRequest = new LoginRequest("kim", "id2208");
+        ClientResponse clientResponse = webResource.path("/login").accept(MediaType.APPLICATION_XML).type(MediaType.APPLICATION_JSON).post(ClientResponse.class, loginRequest);
+        Assert.assertEquals(200, clientResponse.getStatus());
         String token = webResource.path("/login").accept(MediaType.APPLICATION_XML).type(MediaType.APPLICATION_JSON).post(String.class, loginRequest);
         Assert.assertEquals("ID2208_AUTH_TOKEN", token);
         /**
@@ -137,6 +148,8 @@ public class ServiceClientTest {
         /**
          * Test plain /pricelist GET request, test JSON, XML, and unmarshall into java object
          */
+        ClientResponse clientResponse = webResource.path("/pricelist").queryParam("token", SECRET_TOKEN).accept(MediaType.APPLICATION_XML).get(ClientResponse.class);
+        Assert.assertEquals(200, clientResponse.getStatus());
         String response = webResource.path("/pricelist").queryParam("token", SECRET_TOKEN).accept(MediaType.APPLICATION_XML).get(String.class);
         Assert.assertEquals("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><priceEntries><PriceEntry><Itinerary><Flights><DepartmentCity>Stockholm</DepartmentCity><DestinationCity>Madrid</DestinationCity></Flights><Flights><DepartmentCity>Madrid</DepartmentCity><DestinationCity>Mumbai</DestinationCity></Flights></Itinerary><Price>450.0</Price></PriceEntry><PriceEntry><Itinerary><Flights><DepartmentCity>Stockholm</DepartmentCity><DestinationCity>Madrid</DestinationCity></Flights></Itinerary><Price>150.0</Price></PriceEntry><PriceEntry><Itinerary><Flights><DepartmentCity>Stockholm</DepartmentCity><DestinationCity>Paris</DestinationCity></Flights></Itinerary><Price>100.0</Price></PriceEntry><PriceEntry><Itinerary><Flights><DepartmentCity>Madrid</DepartmentCity><DestinationCity>Mumbai</DestinationCity></Flights></Itinerary><Price>300.0</Price></PriceEntry></priceEntries>", response);
         response = webResource.path("/pricelist").queryParam("token", SECRET_TOKEN).accept(MediaType.APPLICATION_JSON).get(String.class);
@@ -150,13 +163,15 @@ public class ServiceClientTest {
     }
 
     /**
-     * Unit test for /flights resource
+     * Unit test for /flights resourcep
      */
     @Test
     public void flightsTest() {
         /**
          * Test plain /flights GET request, test JSON, XML, and unmarshall into java object
          */
+        ClientResponse clientResponse = webResource.path("/flights").queryParam("token", SECRET_TOKEN).accept(MediaType.APPLICATION_XML).get(ClientResponse.class);
+        Assert.assertEquals(200, clientResponse.getStatus());
         String response = webResource.path("/flights").queryParam("token", SECRET_TOKEN).accept(MediaType.APPLICATION_XML).get(String.class);
         Assert.assertEquals("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><flights><Flight><DepartmentCity>Stockholm</DepartmentCity><DestinationCity>Paris</DestinationCity></Flight><Flight><DepartmentCity>Stockholm</DepartmentCity><DestinationCity>Madrid</DestinationCity></Flight><Flight><DepartmentCity>Paris</DepartmentCity><DestinationCity>Madrid</DestinationCity></Flight><Flight><DepartmentCity>Madrid</DepartmentCity><DestinationCity>Mumbai</DestinationCity></Flight></flights>", response);
         response = webResource.path("/flights").queryParam("token", SECRET_TOKEN).accept(MediaType.APPLICATION_JSON).get(String.class);
@@ -167,6 +182,8 @@ public class ServiceClientTest {
         /**
          * Test /itineraries/index GET request
          */
+        clientResponse = webResource.path("/flights/1").queryParam("token", SECRET_TOKEN).accept(MediaType.APPLICATION_JSON).get(ClientResponse.class);
+        Assert.assertEquals(200, clientResponse.getStatus());
         Flight flight = webResource.path("/flights/1").queryParam("token", SECRET_TOKEN).accept(MediaType.APPLICATION_JSON).get(Flight.class);
         Assert.assertEquals("Stockholm", flight.getDepartmentCity());
         Assert.assertEquals("Madrid", flight.getDestinationCity());
@@ -183,6 +200,8 @@ public class ServiceClientTest {
         flightsPutRequest = new FlightsPutRequest(oldFlights);
         flights = (ArrayList) webResource.path("/flights").queryParam("token", SECRET_TOKEN).accept(MediaType.APPLICATION_XML).put(new GenericType<List<Flight>>() {}, flightsPutRequest);
         Assert.assertEquals(4, flights.size());
+        clientResponse = webResource.path("/flights").queryParam("token", SECRET_TOKEN).accept(MediaType.APPLICATION_XML).put(ClientResponse.class, flightsPutRequest);
+        Assert.assertEquals(200, clientResponse.getStatus());
 
         /**
          * Test PUT request for /flight/index
