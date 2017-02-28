@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="pellet2">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/lib/pellet2.0" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <jarDirectory url="file://$PROJECT_DIR$/lib/pellet2.0" recursive="false" />
+  </library>
+</component>

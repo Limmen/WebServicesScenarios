@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:yo="yoo"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="yoo">
+    <xsd:complexType name="addressType">
+        <xsd:sequence>
+            <xsd:element name="name" type="yo:name" minOccurs="0"/>
+            <xsd:element name="company" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="street" type="xsd:string"/>
+            <xsd:element name="city" type="xsd:string"/>
+            <xsd:element name="state" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="postalCode" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="country" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+        <xsd:attribute name="id" type="xsd:ID"/>
+        <xsd:attribute name="href" type="xsd:IDREF"/>
+    </xsd:complexType>
+
+        <xsd:simpleType name="name">
+            <xsd:restriction base="xsd:string">
+                <xsd:minLength value="1"/>
+            </xsd:restriction>
+        </xsd:simpleType>
+</xsd:schema>

@@ -21,7 +21,7 @@
                         schemaLocation="../schemas/get_itineraries.xsd"/>
             <xsd:import namespace="http://id2208.se.kth.top_down.FlightTicketReservationService"
                         schemaLocation="../schemas/get_pricelist.xsd"/>
-            <xsd:import namespace="http://id2208.se.kth.top_down.FlightTicketReservationService"
+            <xsd:import namespace="test"
                         schemaLocation="../schemas/common.xsd"/>
         </xsd:schema>
     </types>

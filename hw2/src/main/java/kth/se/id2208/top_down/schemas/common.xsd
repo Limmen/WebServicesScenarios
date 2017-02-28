@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <xsd:schema
         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-        xmlns="http://id2208.se.kth.top_down.FlightTicketReservationService"
-        targetNamespace="http://id2208.se.kth.top_down.FlightTicketReservationService"
+        xmlns="test"
+        targetNamespace="test"
 >
     <xsd:annotation>
         <xsd:documentation xml:lang="en">

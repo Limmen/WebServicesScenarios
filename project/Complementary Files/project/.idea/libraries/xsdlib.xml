@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="xsdlib">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/lib/xsdlib" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <jarDirectory url="file://$PROJECT_DIR$/lib/xsdlib" recursive="false" />
+  </library>
+</component>

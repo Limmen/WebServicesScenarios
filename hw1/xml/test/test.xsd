@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="test"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:yo="yoo"
+            targetNamespace="test"
+            elementFormDefault="qualified">
+
+    <xsd:import schemaLocation="./address.xsd" namespace="yoo"/>
+    <xsd:element name="mailingList">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="contact" type="yo:addressType" minOccurs="1"
+                             maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+</xsd:schema>

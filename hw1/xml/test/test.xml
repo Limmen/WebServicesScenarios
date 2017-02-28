@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<t:mailingList xmlns:t="test"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="test ./test.xsd">
+
+    <t:contact id="gg" href="gg">
+        <name>test</name>
+        <company>test</company>
+        <street>test</street>
+        <city>test</city>
+        <state>test</state>
+        <postalCode>test</postalCode>
+        <country>test</country>
+    </t:contact>
+
+</t:mailingList>

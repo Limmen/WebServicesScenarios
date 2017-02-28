@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<WSMatching xmlns="http://www.kth.se/ict/id2208/Matching" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.kth.se/ict/id2208/Matching ./Output.xsd">
+    <Macthing>
+        <OutputServiceName>data/WSDLs/LibertyReserveAPIProfile.wsdl</OutputServiceName>
+        <InputServiceName>data/WSDLs/E-xactAPIProfile.wsdl</InputServiceName>
+        <MacthedOperation>
+            <OutputOperationName>Transfer</OutputOperationName>
+            <InputOperationName>TransactionInfo</InputOperationName>
+            <OpScore>0.870660520852492</OpScore>
+            <MacthedElement>
+                <OutputElement>Reference</OutputElement>
+                <InputElement>Reference_No</InputElement>
+                <Score>0.8464817248906141</Score>
+            </MacthedElement>
+            <MacthedElement>
+                <OutputElement>Reference</OutputElement>
+                <InputElement>Reference_3</InputElement>
+                <Score>0.8948393168143698</Score>
+            </MacthedElement>
+        </MacthedOperation>
+        <WsScore>0.870660520852492</WsScore>
+    </Macthing>
+    <Macthing>
+        <OutputServiceName>data/WSDLs/LibertyReserveAPIProfile.wsdl</OutputServiceName>
+        <InputServiceName>data/WSDLs/FirstDataGlobalGatewayAPIProfile.wsdl</InputServiceName>
+        <MacthedOperation>
+            <OutputOperationName>Transfer</OutputOperationName>
+            <InputOperationName>TransactionInfo</InputOperationName>
+            <OpScore>0.870660520852492</OpScore>
+            <MacthedElement>
+                <OutputElement>Reference</OutputElement>
+                <InputElement>Reference_No</InputElement>
+                <Score>0.8464817248906141</Score>
+            </MacthedElement>
+            <MacthedElement>
+                <OutputElement>Reference</OutputElement>
+                <InputElement>Reference_3</InputElement>
+                <Score>0.8948393168143698</Score>
+            </MacthedElement>
+        </MacthedOperation>
+        <WsScore>0.870660520852492</WsScore>
+    </Macthing>
+</WSMatching>
