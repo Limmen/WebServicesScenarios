@@ -20,6 +20,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ *
+ * Syntactic matcher, parse files in DIR and then finds all syntactic matchings over THRESHOLD.
+ *
  * @author Kim Hammar on 2017-02-28.
  */
 public class SyntacticMatcher {
@@ -27,12 +30,18 @@ public class SyntacticMatcher {
     private static final String SYNTACTIC_OUTPUT = "data/output/syntactic_matching.xml";
     private static final String SYNTACTIC_RELATIVE_SCHEMA = "./Output.xsd";
     private static final String SYNTACTIC_NAMESPACE = "http://www.kth.se/ict/id2208/Matching";
+    private static final double THRESHOLD = 0.8;
     private final Parser parser;
 
     public SyntacticMatcher() throws ParserConfigurationException, WSDLException {
         parser = new Parser();
     }
 
+    /**
+     * Calculate the matchings and marshall the output to SYNTACTIC_OUTPUT
+     *
+     * @throws WSDLException
+     */
     public void calculateMatchings() throws WSDLException {
         HashMap<String, Definition> wsdls = parser.parse(getWSDLFileNames());
         System.out.println("Calculating syntactic matches of " + wsdls.size() +" WSDL files...");
@@ -163,7 +172,7 @@ public class SyntacticMatcher {
     private MatchedElementType syntacticMatch(String basicType1, String basicType2) {
         MatchedElementType matchedElementType = null;
         double dist = EditDistance.getSimilarity(basicType1, basicType2);
-        if (dist >= 0.8) {
+        if (dist >= THRESHOLD) {
             matchedElementType = new MatchedElementType();
             matchedElementType.setInputElement(basicType1);
             matchedElementType.setOutputElement(basicType2);

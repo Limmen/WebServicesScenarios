@@ -23,6 +23,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ *
+ * Semantic matcher, parse files in DIR and then finds all syntactic matchings over THRESHOLD.
+ *
  * @author Kim Hammar on 2017-02-28.
  */
 public class SemanticMatcher {
@@ -35,14 +38,15 @@ public class SemanticMatcher {
     private static final double PLUG_IN = 0.6;
     private static final double STRUCTURAL = 0.5;
     private static final double NOT_MATCHED = 0.0;
+    private static final double THRESHOLD = 0.5;
     private final Parser parser;
     private final OWLOntologyManager manager;
     private final OWLOntology ontology;
     private final Reasoner reasoner;
     private final HashMap<String, OWLClass> owlClasses;
     private final ontology.MyOntManager ontsum;
-    //private static String ontLocation = "file:///home/kim/workspace/java/WebServicesScenarios/project/Complementary%20Files/project/data/owl/SUMO.owl";
-    private static String ontLocation = "file:///hdd/workspace/java/WebServicesScenarios/project/Complementary%20Files/project/data/owl/SUMO.owl";
+    private static String ontLocation = "file:///home/kim/workspace/java/WebServicesScenarios/project/Complementary%20Files/project/data/owl/SUMO.owl";
+    //private static String ontLocation = "file:///hdd/workspace/java/WebServicesScenarios/project/Complementary%20Files/project/data/owl/SUMO.owl";
 
     public SemanticMatcher() throws ParserConfigurationException, WSDLException {
         parser = new Parser();
@@ -53,6 +57,11 @@ public class SemanticMatcher {
         owlClasses = ontsum.loadClasses(reasoner);
     }
 
+    /**
+     * Calculate the matchings and marshall the output to SEMANTIC_OUTPUT
+     *
+     * @throws WSDLException
+     */
     public void calculateMatchings() throws WSDLException {
         HashMap<String, Definition> wsdls = parser.parse(getWSDLFileNames());
         System.out.println("Calculating semantic matches of " + wsdls.size() +" (SA)WSDL files...");
@@ -169,7 +178,7 @@ public class SemanticMatcher {
         String semClass1 = parser.getClass(annotatedType1);
         String semClass2 = parser.getClass(annotatedType2);
         double score = semanticScore(semClass1, semClass2);
-        if (score >= 0.5) {
+        if (score >= THRESHOLD) {
             matchedElementType = new MatchedElementType();
             matchedElementType.setInputElement(annotatedType1.getAttribute("name"));
             matchedElementType.setOutputElement(annotatedType2.getAttribute("name"));

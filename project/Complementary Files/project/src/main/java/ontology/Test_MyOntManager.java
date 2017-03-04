@@ -20,8 +20,8 @@ public class Test_MyOntManager {
 	private static OWLOntologyManager manager = null;
 	private static OWLOntology ontology = null;
 	private static Reasoner reasoner = null;
-	//private static String ontLocation = "file:///home/kim/workspace/java/WebServicesScenarios/project/Complementary%20Files/project/data/owl/travel.owl";
-	private static String ontLocation = "file:///hdd/workspace/java/WebServicesScenarios/project/Complementary%20Files/project/data/owl/travel.owl";
+	private static String ontLocation = "file:///home/kim/workspace/java/WebServicesScenarios/project/Complementary%20Files/project/data/owl/travel.owl";
+	//private static String ontLocation = "file:///hdd/workspace/java/WebServicesScenarios/project/Complementary%20Files/project/data/owl/travel.owl";
 	//private static String ontLocation = "file:///hdd/workspace/java/WebServicesScenarios/project/Complementary%20Files/project/data/owl/SUMO.owl";
 	private static MyOntManager ontsum = null;
 

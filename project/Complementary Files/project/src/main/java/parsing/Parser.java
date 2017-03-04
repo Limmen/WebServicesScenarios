@@ -20,6 +20,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * Parser API on top of WSDL4J and JAXB. Provides necessary methods to extract information to do semantic and syntactic
+ * matchings.
+ *
  * @author Kim Hammar on 2017-02-28.
  */
 public class Parser {
@@ -29,6 +32,12 @@ public class Parser {
     private final WSDLReader wsdlReader;
     private final ArrayList<String> basicTypes = new ArrayList<>();
 
+    /**
+     * Class constructor, initialize things.
+     *
+     * @throws ParserConfigurationException
+     * @throws WSDLException
+     */
     public Parser() throws ParserConfigurationException, WSDLException {
         documentBuilderFactory = DocumentBuilderFactory.newInstance();
         documentBuilder = documentBuilderFactory.newDocumentBuilder();
@@ -55,10 +64,24 @@ public class Parser {
         basicTypes.add("NOTATION");
     }
 
+    /**
+     * Parses a given WSDL document
+     *
+     * @param document
+     * @return
+     * @throws WSDLException
+     */
     public Definition parse(String document) throws WSDLException {
         return wsdlReader.readWSDL(document);
     }
 
+    /**
+     * Parses a set of filenames and returns a hashmap of <FileName, ParsedResult>
+     *
+     * @param files
+     * @return
+     * @throws WSDLException
+     */
     public HashMap<String, Definition> parse(File[] files) throws WSDLException {
         HashMap<String, Definition> parsed = new HashMap<>();
         for (int i = 0; i < files.length; i++) {
@@ -68,37 +91,88 @@ public class Parser {
         return parsed;
     }
 
+    /**
+     * Get schemaElement of a WSDL file
+     *
+     * @param wsdl
+     * @return
+     */
     public Element getSchemaElement(Definition wsdl) {
         Types types = wsdl.getTypes();
         return ((Schema) types.getExtensibilityElements().get(0)).getElement();
     }
 
+    /**
+     * Check if a given element is annotated
+     *
+     * @param element
+     * @return
+     */
     public boolean isAnnotated(Element element) {
         return element.hasAttribute("sawsdl:modelReference");
     }
 
+    /**
+     * Get semantic class of a element
+     *
+     * @param element
+     * @return
+     */
     public String getClass(Element element){
         String modelRef = element.getAttribute("sawsdl:modelReference");
         String semClass = modelRef.substring(modelRef.lastIndexOf("#")+1, modelRef.length());
         return semClass;
     }
 
+    /**
+     * Get all elements of a schema
+     *
+     * @param schemaElement
+     * @return
+     */
     public NodeList getElementsOfSchema(Element schemaElement) {
         return schemaElement.getElementsByTagNameNS("http://www.w3.org/2001/XMLSchema", "element");
     }
 
+    /**
+     * Get a list of complex types of a schema element
+     *
+     * @param schemaElement
+     * @return
+     */
     public NodeList getComplexTypesOfSchema(Element schemaElement) {
         return schemaElement.getElementsByTagNameNS("http://www.w3.org/2001/XMLSchema", "complexType");
     }
 
+    /**
+     * Get a list of simpletypes of a schema element
+     *
+     * @param schemaElement
+     * @return
+     */
     public NodeList getSimpleTypesOfSchema(Element schemaElement) {
         return schemaElement.getElementsByTagNameNS("http://www.w3.org/2001/XMLSchema", "simpleType");
     }
 
+    /**
+     * Utility function to get element in schema by attribute value
+     *
+     * @param attrValue
+     * @param attrName
+     * @param schemaElement
+     * @return
+     */
     public Element getElementInSchemaByAttribute(String attrValue, String attrName, Element schemaElement) {
         return com.ibm.wsdl.util.xml.DOMUtils.findChildElementWithAttribute(schemaElement, attrName, attrValue);
     }
 
+    /**
+     * Get a given element based on its name among a set of elements.
+     *
+     * @param name
+     * @param elements
+     * @return
+     */
     public Element getElementInSchema(String name, NodeList elements) {
         for (int i = 0; i < elements.getLength(); i++) {
             Element element = (Element) elements.item(i);
@@ -108,6 +182,12 @@ public class Parser {
         return null;
     }
 
+    /**
+     * Returns a list of all operations given a WSDL file.
+     *
+     * @param wsdl
+     * @return
+     */
     public ArrayList<Operation> getOperations(Definition wsdl) {
         Map portTypes = wsdl.getPortTypes();
         ArrayList<Operation> operations = new ArrayList();
@@ -119,11 +199,28 @@ public class Parser {
         return operations;
     }
 
+    /**
+     * Method that returns the highest level semantically annotated element from the given root element.
+     * If there exist multiple annotations at the same level all of them are returned.
+     *
+     * @param element root element
+     * @param schemaElement Schema element where the types are
+     * @return List of higest-level annotated files.
+     */
     public ArrayList<Element> getHighestLevelAnnotated(Element element, Element schemaElement) {
         ArrayList<Element> annotatedElements = new ArrayList<>();
         return getHighestLevelAnnotated(element, annotatedElements, schemaElement);
     }
 
+    /**
+     * Method that returns the highest level semantically annotated element from the given root element.
+     * If there exist multiple annotations at the same level all of them are returned.
+     *
+     * @param element root element
+     * @param annotatedElements Recursive accumulator
+     * @param schemaElement Schema element where the types are
+     * @return List of higest-level annotated files.
+     */
     public ArrayList<Element> getHighestLevelAnnotated(Element element, ArrayList<Element> annotatedElements, Element schemaElement) {
         if(element != null) {
             if (isAnnotated(element)) {
@@ -152,11 +249,26 @@ public class Parser {
         return annotatedElements;
     }
 
+    /**
+     * Flatten a given element and get all basic elements.
+     *
+     * @param element Element to be flattened
+     * @param schemaElement schema where the types are
+     * @return list of basic elements.
+     */
     public ArrayList<Element> getBasicElements(Element element, Element schemaElement) {
         ArrayList<Element> basicElements = new ArrayList<>();
         return getBasicElements(element, basicElements, schemaElement);
     }
 
+    /**
+     * Flatten a given element and get all basic elements.
+     *
+     * @param element Element to be flattened.
+     * @param basicElements Recursive accumulator
+     * @param schemaElement Schema where the types are
+     * @return List of basic elements
+     */
     public ArrayList<Element> getBasicElements(Element element, ArrayList<Element> basicElements, Element schemaElement) {
         if (element != null) {
             if (element.hasAttribute("type") || element.hasAttribute("base")) {
@@ -184,6 +296,13 @@ public class Parser {
         return basicElements;
     }
 
+    /**
+     * Check if a given type is a basic type or not
+     *
+     * @param type
+     * @param schemaPrefix
+     * @return boolean
+     */
     public boolean isBasicType(String type, String schemaPrefix) {
         if (basicTypes.contains(type))
             return true;
